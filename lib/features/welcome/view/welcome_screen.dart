@@ -3,6 +3,7 @@ import 'package:sub_notifier_app/extensions/extensions.dart';
 import 'package:sub_notifier_app/icons/sn_icons.dart';
 import 'package:sub_notifier_app/routes/router.dart';
 import 'package:sub_notifier_app/theme/theme.dart';
+import 'package:sub_notifier_app/widgets/sn_icon_button.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -12,14 +13,15 @@ class WelcomeScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Stack(
+          alignment: Alignment.center,
           children: [
-            IconButton(
-              alignment: Alignment.topLeft,
-              icon: Icon(
-                SnIcons.language,
-                color: Colors.black,
+            Positioned(
+              top: 1,
+              left: 1,
+              child: SnIconButton(
+                icon: Icon(SnIcons.language),
+                onTap: () {},
               ),
-              onPressed: () {},
             ),
             Center(
               child: Column(
@@ -51,6 +53,23 @@ class WelcomeScreen extends StatelessWidget {
                           color: Colors.white,
                         ),
                       ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Positioned(
+              bottom: 1,
+              child: Column(
+                children: [
+                  SnIconButton(
+                    icon: Icon(SnIcons.github),
+                    onTap: () {},
+                  ),
+                  Text(
+                    'версия 1.0',
+                    style: ThemeTypography.labelLarge.copyWith(
+                      color: ThemeColors.textIconLow,
                     ),
                   )
                 ],
