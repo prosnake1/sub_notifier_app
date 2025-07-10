@@ -56,5 +56,6 @@ flutter:
     - family: Archivo Black
       fonts:
         - asset: fonts/ArchivoBlack-Regular.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
+    - family: SN Icons
+      fonts:
+        - asset: fonts/icons/sn_icons.ttf

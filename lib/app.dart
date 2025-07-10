@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sub_notifier_app/router/router.dart';
+import 'package:sub_notifier_app/routes/router.dart';
 import 'package:sub_notifier_app/theme/theme_data.dart';
 
 class SubNotifierApp extends StatelessWidget {
