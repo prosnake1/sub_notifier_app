@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:sub_notifier_app/domain/repositories/user/user_repository.dart';
 import 'package:sub_notifier_app/extensions/extensions.dart';
 import 'package:sub_notifier_app/icons/sn_icons.dart';
+import 'package:sub_notifier_app/locator/di.dart';
 import 'package:sub_notifier_app/routes/router.dart';
 import 'package:sub_notifier_app/theme/theme.dart';
 import 'package:sub_notifier_app/widgets/sn_icon_button.dart';
@@ -38,7 +40,10 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                   20.ph,
                   TextButton(
-                    onPressed: () => router.go('/home'),
+                    onPressed: () {
+                      getIt.get<UserRepository>().setWelcomeViewed(true);
+                      router.go('/home');
+                    },
                     style: TextButton.styleFrom(
                       backgroundColor: Colors.black,
                       shape: RoundedRectangleBorder(

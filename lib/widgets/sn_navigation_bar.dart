@@ -27,6 +27,7 @@ class SnNavigationBar extends StatelessWidget {
           children: [
             Expanded(
               child: InkWell(
+                enableFeedback: false,
                 onTap: () {
                   navigationShell.goBranch(0);
                   changeItemColor();
@@ -55,11 +56,13 @@ class SnNavigationBar extends StatelessWidget {
                   changeItemColor();
                 },
                 style: TextButton.styleFrom(
-                  backgroundColor: Colors.black,
-                  minimumSize: Size(120, 40),
-                ),
+                    backgroundColor: Colors.black,
+                    minimumSize: Size(120, 40),
+                    enableFeedback: false),
                 child: Text(
-                  'Добавить',
+                  (navigationShell.currentIndex != 1)
+                      ? 'Добавить'
+                      : 'Сохранить',
                   style: ThemeTypography.bodyLarge.copyWith(
                     color: Colors.white,
                   ),
@@ -68,6 +71,7 @@ class SnNavigationBar extends StatelessWidget {
             ),
             Expanded(
               child: InkWell(
+                enableFeedback: false,
                 onTap: () {
                   navigationShell.goBranch(2);
                   changeItemColor();

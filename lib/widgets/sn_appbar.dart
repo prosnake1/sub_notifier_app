@@ -7,18 +7,32 @@ class SnAppBar extends StatelessWidget implements PreferredSizeWidget {
   const SnAppBar({
     super.key,
     required this.title,
+    this.notificationsEnabled = true,
+    this.leadingEnabled = false,
   });
   final String title;
+  final bool notificationsEnabled;
+  final bool leadingEnabled;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      actions: [
-        SnIconButton(
-          icon: Icon(SnIcons.notification),
-          onTap: () {},
-        ),
-      ],
+      actions: !notificationsEnabled
+          ? []
+          : [
+              SnIconButton(
+                icon: Icon(SnIcons.notification),
+                onTap: () {},
+              ),
+            ],
+      leading: !leadingEnabled
+          ? null
+          : SnIconButton(
+              icon: Icon(
+                SnIcons.chevron_left,
+              ),
+              onTap: () {},
+            ),
       backgroundColor: Colors.white,
       centerTitle: true,
       title: Text(

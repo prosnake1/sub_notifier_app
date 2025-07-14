@@ -15,4 +15,8 @@ class SnIcons {
   static const IconData clipboard = IconData(0xe905, fontFamily: _snFamily);
   static const IconData github = IconData(0xe906, fontFamily: _snFamily);
   static const IconData language = IconData(0xe907, fontFamily: _snFamily);
+  static const IconData notification_off =
+      IconData(0xe908, fontFamily: _snFamily);
+  static const IconData moon = IconData(0xe909, fontFamily: _snFamily);
+  static const IconData chevron_left = IconData(0xe90a, fontFamily: _snFamily);
 }

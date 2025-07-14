@@ -14,6 +14,7 @@ void main() async {
       final SharedPreferences preferences =
           await SharedPreferences.getInstance();
       setupLocator(preferences: preferences);
+
       runApp(TranslationProvider(child: const SubNotifierApp()));
     },
     (error, stack) {

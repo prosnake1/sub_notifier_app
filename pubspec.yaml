@@ -20,6 +20,7 @@ dependencies:
   slang_flutter: ^4.7.0
   talker: ^4.9.2
   talker_flutter: ^4.9.2
+  flutter_bloc: ^9.1.1
 
   cupertino_icons: ^1.0.8
 

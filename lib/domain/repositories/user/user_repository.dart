@@ -8,4 +8,12 @@ class UserRepository {
   Future<void> setWelcomeViewed(bool viewed) async {
     await preferences.setBool('welcomeViewed', viewed);
   }
+
+  bool get isViewed => preferences.getBool('welcomeViewed') ?? false;
+
+  Future<void> setDarkMode(bool isDarkMode) async {
+    await preferences.setBool('isDarkMode', isDarkMode);
+  }
+
+  bool get isDark => preferences.getBool('isDarkMode') ?? false;
 }

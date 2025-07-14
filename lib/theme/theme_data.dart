@@ -34,4 +34,17 @@ class AppTheme {
       switchTheme: _switchTheme,
     );
   }
+
+  static ThemeData get darkTheme {
+    return ThemeData(
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: ThemeColors.textIconDefault,
+      ),
+      fontFamily: 'Arial',
+      textTheme: _textTheme,
+      useMaterial3: true,
+      scaffoldBackgroundColor: ThemeColors.textIconDefault,
+      switchTheme: _switchTheme,
+    );
+  }
 }
