@@ -15,5 +15,5 @@ class ThemePalette {
 
   static const Color primary100 = Color(0xFF0C8EF4);
 
-  static const Color secondary = Color(0xFF9D9D9D);
+  static const Color secondary = Color(0xFFF9F9F9);
 }
