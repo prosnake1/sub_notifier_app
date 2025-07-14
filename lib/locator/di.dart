@@ -7,5 +7,6 @@ final getIt = GetIt.instance;
 final talker = TalkerFlutter.init();
 
 Future<void> setupLocator({required SharedPreferences preferences}) async {
+  getIt.registerSingleton(talker);
   getIt.registerSingleton(UserRepository(preferences: preferences));
 }

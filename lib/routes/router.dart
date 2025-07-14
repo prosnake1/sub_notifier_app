@@ -5,12 +5,15 @@ import 'package:sub_notifier_app/features/home/view/home_screen.dart';
 import 'package:sub_notifier_app/features/settings/view/settings_screen.dart';
 import 'package:sub_notifier_app/features/splash/view/splash_screen.dart';
 import 'package:sub_notifier_app/features/welcome/view/welcome_screen.dart';
+import 'package:sub_notifier_app/locator/di.dart';
 import 'package:sub_notifier_app/widgets/sn_navigation_bar.dart';
+import 'package:talker_flutter/talker_flutter.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
 
 final GoRouter router = GoRouter(
   navigatorKey: _rootNavigatorKey,
+  observers: [TalkerRouteObserver(getIt<Talker>())],
   initialLocation: '/',
   routes: <RouteBase>[
     StatefulShellRoute.indexedStack(

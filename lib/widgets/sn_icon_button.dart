@@ -20,8 +20,8 @@ class SnIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       icon: icon,
-      color: color,
       onPressed: onTap,
+      color: color,
       iconSize: _getIconSize(),
     );
   }
