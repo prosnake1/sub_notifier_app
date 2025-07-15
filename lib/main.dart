@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sub_notifier_app/app.dart';
@@ -14,7 +13,6 @@ void main() async {
       final SharedPreferences preferences =
           await SharedPreferences.getInstance();
       setupLocator(preferences: preferences);
-
       runApp(TranslationProvider(child: const SubNotifierApp()));
     },
     (error, stack) {

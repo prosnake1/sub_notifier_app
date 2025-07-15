@@ -8,9 +8,9 @@ class ThemeCubit extends Cubit<ThemeData> {
   final UserRepository _repository;
 
   static final _lightTheme = AppTheme.lightTheme;
-  static final _darkTheme = AppTheme.lightTheme;
+  static final _darkTheme = AppTheme.darkTheme;
 
-  void enableDark() {
+  void enableTheme() {
     final isDark = _repository.isDark;
     emit(isDark ? _darkTheme : _lightTheme);
   }

@@ -15,6 +15,7 @@ class _SplashScreenState extends State<SplashScreen> {
   final _themeCubit = getIt<ThemeCubit>();
   @override
   void initState() {
+    _themeCubit.enableTheme();
     Future.delayed(const Duration(milliseconds: 1000), () {
       router.go('/');
     });

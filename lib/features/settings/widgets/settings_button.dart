@@ -19,14 +19,15 @@ class SettingsButton extends StatefulWidget {
   final IconData icon;
   final IconData? disabledIcon;
   final String text;
-  final Function() onTap;
+  final Function onTap;
 
   @override
   State<SettingsButton> createState() => _SettingsButtonState();
 }
 
 class _SettingsButtonState extends State<SettingsButton> {
-  bool isActive = true;
+  final _userRepository = getIt<UserRepository>();
+  bool? isActive;
 
   @override
   void initState() {
@@ -34,26 +35,16 @@ class _SettingsButtonState extends State<SettingsButton> {
     super.initState();
   }
 
-  Future<void> _getStatus() async {
-    final prefs = getIt<UserRepository>().preferences;
-    setState(() {
-      isActive = prefs.getBool(widget.preferenceKey) ?? false;
-    });
-  }
-
-  Future<void> _saveStatus(bool value) async {
-    final prefs = getIt<UserRepository>().preferences;
-    await prefs.setBool(widget.preferenceKey, value);
-  }
-
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        setState(() {
-          isActive = !isActive;
-          _saveStatus(isActive);
-        });
+        widget.onTap();
+        if (isActive != null) {
+          isActive = !isActive!;
+          _saveStatus(isActive!);
+          setState(() {});
+        }
       },
       borderRadius: BorderRadius.circular(15),
       child: Container(
@@ -66,8 +57,11 @@ class _SettingsButtonState extends State<SettingsButton> {
           children: [
             20.ph,
             Icon(
-              !isActive ? widget.icon : widget.disabledIcon,
+              (isActive == null || isActive == false)
+                  ? widget.icon
+                  : widget.disabledIcon,
               size: 40,
+              color: Colors.red,
             ),
             Text(
               widget.text,
@@ -77,5 +71,20 @@ class _SettingsButtonState extends State<SettingsButton> {
         ),
       ),
     );
+  }
+
+  Future<void> _getStatus() async {
+    final prefs = _userRepository.preferences;
+    final value = prefs.getBool(widget.preferenceKey) ?? false;
+    if (widget.disabledIcon != null) {
+      setState(() {
+        isActive = value;
+      });
+    }
+  }
+
+  Future<void> _saveStatus(bool value) async {
+    final prefs = _userRepository.preferences;
+    await prefs.setBool(widget.preferenceKey, value);
   }
 }

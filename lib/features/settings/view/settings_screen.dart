@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sub_notifier_app/bloc/theme/theme_cubit.dart';
 import 'package:sub_notifier_app/domain/repositories/user/user_repository.dart';
 import 'package:sub_notifier_app/features/settings/widgets/widgets.dart';
 import 'package:sub_notifier_app/icons/sn_icons.dart';
@@ -13,6 +14,14 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  final _userRepository = getIt<UserRepository>();
+  final _themeCubit = getIt<ThemeCubit>();
+  @override
+  void initState() {
+    talker.debug('Темная тема ${_userRepository.isDark}');
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,15 +38,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
             disabledIcon: SnIcons.moon,
             text: 'тема',
             onTap: () {
-              getIt.get<UserRepository>().setDarkMode(false);
-              setState(() {});
+              _userRepository.setDarkMode(!_userRepository.isDark);
+              talker.debug('Темная тема ${_userRepository.isDark}');
+              _themeCubit.enableTheme();
             },
           ),
           SettingsButton(
-            preferenceKey: '',
+            preferenceKey: 'isEnabledNotifications',
             icon: SnIcons.notification,
             text: 'уведомления',
-            disabledIcon: SnIcons.notification_off,
             onTap: () {},
           ),
         ],
