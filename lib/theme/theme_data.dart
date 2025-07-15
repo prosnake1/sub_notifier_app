@@ -25,26 +25,72 @@ class AppTheme {
   static ThemeData get lightTheme {
     return ThemeData(
       colorScheme: ColorScheme.fromSeed(
-        seedColor: ThemeColors.textIconDefault,
+        seedColor: Colors.white,
+        secondary: Colors.black,
       ),
       fontFamily: 'Arial',
       textTheme: _textTheme,
       useMaterial3: true,
       scaffoldBackgroundColor: ThemeColors.white,
       switchTheme: _switchTheme,
+      appBarTheme: AppBarTheme(
+        backgroundColor: Colors.white,
+        titleTextStyle: ThemeTypography.headlineSmall.copyWith(
+          color: (Colors.black),
+        ),
+      ),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        selectedItemColor: Colors.black,
+      ),
+      bottomAppBarTheme: BottomAppBarTheme(
+        color: Colors.white,
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          backgroundColor: Colors.black,
+          foregroundColor: Colors.white,
+          enableFeedback: false,
+        ),
+      ),
+      iconTheme: IconThemeData(
+        color: Colors.black,
+      ),
     );
   }
 
   static ThemeData get darkTheme {
     return ThemeData(
       colorScheme: ColorScheme.fromSeed(
-        seedColor: ThemeColors.textIconDefault,
+        seedColor: Colors.black,
+        secondary: Colors.white,
       ),
       fontFamily: 'Arial',
       textTheme: _textTheme,
       useMaterial3: true,
       scaffoldBackgroundColor: ThemeColors.textIconDefault,
+      appBarTheme: AppBarTheme(
+        backgroundColor: Colors.black,
+        titleTextStyle: ThemeTypography.headlineSmall.copyWith(
+          color: Colors.white,
+        ),
+      ),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        selectedItemColor: Colors.white,
+      ),
+      bottomAppBarTheme: BottomAppBarTheme(
+        color: Colors.black,
+      ),
       switchTheme: _switchTheme,
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.black,
+          enableFeedback: false,
+        ),
+      ),
+      iconTheme: IconThemeData(
+        color: Colors.white,
+      ),
     );
   }
 }

@@ -61,7 +61,6 @@ class _SettingsButtonState extends State<SettingsButton> {
                   ? widget.icon
                   : widget.disabledIcon,
               size: 40,
-              color: Colors.red,
             ),
             Text(
               widget.text,

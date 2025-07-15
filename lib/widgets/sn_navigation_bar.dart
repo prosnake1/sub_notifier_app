@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sub_notifier_app/icons/sn_icons.dart';
-import 'package:sub_notifier_app/theme/theme_colors.dart';
 import 'package:sub_notifier_app/theme/theme_typography.dart';
 
 class SnNavigationBar extends StatelessWidget {
@@ -20,7 +19,6 @@ class SnNavigationBar extends StatelessWidget {
       bottomNavigationBar: BottomAppBar(
         height: 56,
         padding: EdgeInsets.zero,
-        color: ThemeColors.appBarDefault,
         child: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -56,16 +54,13 @@ class SnNavigationBar extends StatelessWidget {
                   changeItemColor();
                 },
                 style: TextButton.styleFrom(
-                    backgroundColor: Colors.black,
-                    minimumSize: Size(120, 40),
-                    enableFeedback: false),
+                  minimumSize: Size(120, 40),
+                ),
                 child: Text(
                   (navigationShell.currentIndex != 1)
                       ? 'Добавить'
                       : 'Сохранить',
-                  style: ThemeTypography.bodyLarge.copyWith(
-                    color: Colors.white,
-                  ),
+                  style: ThemeTypography.bodyLarge,
                 ),
               ),
             ),
@@ -108,7 +103,9 @@ class SnNavigationBar extends StatelessWidget {
     }
   }
 
-  Color getItemColor(int currentIndex) {
+  Color getItemColor(
+    int currentIndex,
+  ) {
     return isRouteSelected(currentIndex) ? Colors.black : Colors.grey;
   }
 
