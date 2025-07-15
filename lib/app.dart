@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sub_notifier_app/domain/repositories/user/user_repository.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sub_notifier_app/bloc/theme/theme_cubit.dart';
 import 'package:sub_notifier_app/locator/di.dart';
 import 'package:sub_notifier_app/routes/router.dart';
 import 'package:sub_notifier_app/theme/theme_data.dart';
@@ -9,12 +10,16 @@ class SubNotifierApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isDarkMode = getIt<UserRepository>().isDark;
-    return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      theme: !isDarkMode ? AppTheme.lightTheme : AppTheme.darkTheme,
-      darkTheme: AppTheme.darkTheme,
-      routerConfig: router,
+    return BlocBuilder<ThemeCubit, ThemeData>(
+      bloc: getIt<ThemeCubit>(),
+      builder: (_, theme) {
+        return MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          theme: theme,
+          darkTheme: AppTheme.darkTheme,
+          routerConfig: router,
+        );
+      },
     );
   }
 }

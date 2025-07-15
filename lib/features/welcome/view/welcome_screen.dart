@@ -6,6 +6,7 @@ import 'package:sub_notifier_app/locator/di.dart';
 import 'package:sub_notifier_app/routes/router.dart';
 import 'package:sub_notifier_app/theme/theme.dart';
 import 'package:sub_notifier_app/widgets/sn_icon_button.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -27,7 +28,6 @@ class WelcomeScreen extends StatelessWidget {
             ),
             Center(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
@@ -69,10 +69,14 @@ class WelcomeScreen extends StatelessWidget {
                 children: [
                   SnIconButton(
                     icon: Icon(SnIcons.github),
-                    onTap: () {},
+                    onTap: () async {
+                      final url = Uri.parse("https://github.com/prosnake1");
+
+                      await launchUrl(url);
+                    },
                   ),
                   Text(
-                    'версия 1.0',
+                    'v1.0',
                     style: ThemeTypography.labelLarge.copyWith(
                       color: ThemeColors.textIconLow,
                     ),

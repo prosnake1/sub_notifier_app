@@ -14,7 +14,7 @@ final _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
 final GoRouter router = GoRouter(
   navigatorKey: _rootNavigatorKey,
   observers: [TalkerRouteObserver(getIt<Talker>())],
-  initialLocation: '/',
+  initialLocation: '/splash',
   routes: <RouteBase>[
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) => SnNavigationBar(
