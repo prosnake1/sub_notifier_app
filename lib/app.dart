@@ -16,6 +16,7 @@ class SubNotifierApp extends StatelessWidget {
         return MaterialApp.router(
           debugShowCheckedModeBanner: false,
           theme: theme,
+          themeMode: ThemeMode.system,
           darkTheme: AppTheme.darkTheme,
           routerConfig: router,
         );

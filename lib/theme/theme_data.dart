@@ -24,9 +24,11 @@ final _textTheme = TextTheme(
 class AppTheme {
   static ThemeData get lightTheme {
     return ThemeData(
+      brightness: Brightness.light,
       colorScheme: ColorScheme.fromSeed(
         seedColor: Colors.white,
         secondary: Colors.black,
+        brightness: Brightness.light,
       ),
       fontFamily: 'Arial',
       textTheme: _textTheme,
@@ -60,9 +62,11 @@ class AppTheme {
 
   static ThemeData get darkTheme {
     return ThemeData(
+      brightness: Brightness.dark,
       colorScheme: ColorScheme.fromSeed(
         seedColor: Colors.black,
         secondary: Colors.white,
+        brightness: Brightness.dark,
       ),
       fontFamily: 'Arial',
       textTheme: _textTheme,

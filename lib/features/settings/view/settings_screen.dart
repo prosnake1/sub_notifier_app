@@ -39,7 +39,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
             text: 'тема',
             onTap: () {
               _userRepository.setDarkMode(!_userRepository.isDark);
-              talker.debug('Темная тема ${_userRepository.isDark}');
               _themeCubit.enableTheme();
             },
           ),
