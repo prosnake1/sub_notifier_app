@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sub_notifier_app/app.dart';
 import 'package:sub_notifier_app/i18n/strings.g.dart';
@@ -10,9 +11,14 @@ void main() async {
     () async {
       WidgetsFlutterBinding.ensureInitialized();
       LocaleSettings.useDeviceLocale();
+
       final SharedPreferences preferences =
           await SharedPreferences.getInstance();
+
+      await Hive.initFlutter();
+
       setupLocator(preferences: preferences);
+
       runApp(TranslationProvider(child: const SubNotifierApp()));
     },
     (error, stack) {

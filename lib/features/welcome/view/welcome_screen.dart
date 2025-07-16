@@ -4,7 +4,6 @@ import 'package:sub_notifier_app/extensions/extensions.dart';
 import 'package:sub_notifier_app/icons/sn_icons.dart';
 import 'package:sub_notifier_app/locator/di.dart';
 import 'package:sub_notifier_app/routes/router.dart';
-import 'package:sub_notifier_app/theme/theme.dart';
 import 'package:sub_notifier_app/widgets/sn_icon_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -39,22 +38,13 @@ class WelcomeScreen extends StatelessWidget {
                     style: Theme.of(context).textTheme.labelLarge,
                   ),
                   20.ph,
-                  TextButton(
+                  ElevatedButton(
                     onPressed: () {
                       getIt.get<UserRepository>().setWelcomeViewed(true);
                       router.go('/home');
                     },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 40),
-                      child: Text(
-                        'вперед',
-                        style: ThemeTypography.headlineSmall.copyWith(
-                          color:
-                              (Theme.of(context).brightness == Brightness.dark)
-                                  ? Colors.black
-                                  : Colors.white,
-                        ),
-                      ),
+                    child: Text(
+                      'Вперед',
                     ),
                   )
                 ],

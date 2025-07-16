@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:sub_notifier_app/extensions/widget_extension.dart';
+import 'package:sub_notifier_app/icons/sn_icons.dart';
+import 'package:sub_notifier_app/routes/router.dart';
 import 'package:sub_notifier_app/theme/theme.dart';
 import 'package:sub_notifier_app/widgets/widgets.dart';
 
@@ -17,6 +20,7 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
       child: Scaffold(
         appBar: SnAppBar(
           title: 'Новая подписка',
+          notificationsEnabled: false,
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -78,6 +82,19 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
                 ),
                 SnTextField(
                   labelText: 'цвет фона',
+                  icon: SnIcons.circle_add,
+                  readOnly: true,
+                  borderEnabled: true,
+                  iconEnabled: true,
+                ),
+                100.ph,
+                ElevatedButton(
+                  onPressed: () {
+                    router.go('/home');
+                  },
+                  child: Text(
+                    'Сохранить',
+                  ),
                 ),
               ],
             ),

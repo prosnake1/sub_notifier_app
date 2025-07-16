@@ -6,9 +6,15 @@ class SnTextField extends StatelessWidget {
     super.key,
     required this.labelText,
     this.readOnly = false,
+    this.icon,
+    this.borderEnabled = false,
+    this.iconEnabled = false,
   });
   final String labelText;
   final bool readOnly;
+  final IconData? icon;
+  final bool borderEnabled;
+  final bool iconEnabled;
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +28,32 @@ class SnTextField extends StatelessWidget {
           ),
           TextFormField(
             readOnly: readOnly,
+            decoration: InputDecoration(
+              fillColor: readOnly ? Colors.transparent : null,
+              enabledBorder: borderEnabled
+                  ? OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      borderSide: BorderSide(
+                        width: 4,
+                        color: (Theme.of(context).brightness == Brightness.dark)
+                            ? Colors.white
+                            : Colors.black,
+                      ),
+                    )
+                  : null,
+              prefixIcon: Align(
+                alignment: Alignment.center,
+                child: iconEnabled
+                    ? Icon(
+                        icon,
+                        size: 24,
+                        color: (Theme.of(context).brightness == Brightness.dark)
+                            ? Colors.white
+                            : Colors.black,
+                      )
+                    : null,
+              ),
+            ),
             style: ThemeTypography.bodyLarge.copyWith(
               fontFamily: 'Roboto',
             ),

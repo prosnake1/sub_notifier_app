@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sub_notifier_app/bloc/theme/theme_cubit.dart';
+import 'package:sub_notifier_app/domain/repositories/user/user_repository.dart';
 import 'package:sub_notifier_app/icons/sn_icons.dart';
 import 'package:sub_notifier_app/locator/di.dart';
 import 'package:sub_notifier_app/routes/router.dart';
@@ -13,11 +14,13 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   final _themeCubit = getIt<ThemeCubit>();
+  final _userRepository = getIt<UserRepository>();
   @override
   void initState() {
     _themeCubit.enableTheme();
+
     Future.delayed(const Duration(milliseconds: 1000), () {
-      router.go('/');
+      router.go(_userRepository.isViewed ? '/home' : '/welcome');
     });
     super.initState();
   }

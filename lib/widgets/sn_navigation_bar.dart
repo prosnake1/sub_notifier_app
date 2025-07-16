@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sub_notifier_app/icons/sn_icons.dart';
+import 'package:sub_notifier_app/routes/router.dart';
 import 'package:sub_notifier_app/theme/theme.dart';
 
 class SnNavigationBar extends StatelessWidget {
@@ -60,15 +61,13 @@ class SnNavigationBar extends StatelessWidget {
             Expanded(
               child: TextButton(
                 onPressed: () {
-                  navigationShell.goBranch(1);
+                  router.push('/add-subscription');
                 },
                 style: TextButton.styleFrom(
                   minimumSize: Size(120, 40),
                 ),
                 child: Text(
-                  (navigationShell.currentIndex != 1)
-                      ? 'Добавить'
-                      : 'Сохранить',
+                  'Добавить',
                   style: ThemeTypography.bodyLarge,
                 ),
               ),
@@ -77,7 +76,7 @@ class SnNavigationBar extends StatelessWidget {
               child: InkWell(
                 enableFeedback: false,
                 onTap: () {
-                  navigationShell.goBranch(2);
+                  navigationShell.goBranch(1);
                 },
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -85,12 +84,12 @@ class SnNavigationBar extends StatelessWidget {
                     Icon(
                       SnIcons.settings,
                       size: 35,
-                      color: getColor(2),
+                      color: getColor(1),
                     ),
                     Text(
                       'Настройки',
                       style: ThemeTypography.bodySmall.copyWith(
-                        color: getColor(2),
+                        color: getColor(1),
                       ),
                     ),
                   ],

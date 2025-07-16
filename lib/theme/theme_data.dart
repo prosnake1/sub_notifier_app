@@ -37,6 +37,7 @@ class AppTheme {
       switchTheme: _switchTheme,
       appBarTheme: AppBarTheme(
         backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
         titleTextStyle: ThemeTypography.headlineSmall.copyWith(
           color: (Colors.black),
         ),
@@ -81,6 +82,18 @@ class AppTheme {
         buttonColor: Colors.black,
         textTheme: ButtonTextTheme.accent,
       ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.black,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(35),
+          ),
+          textStyle: ThemeTypography.bodyLarge.copyWith(
+            color: Colors.white,
+          ),
+          foregroundColor: Colors.white,
+        ),
+      ),
     );
   }
 
@@ -101,6 +114,7 @@ class AppTheme {
       scaffoldBackgroundColor: Colors.black,
       appBarTheme: AppBarTheme(
         backgroundColor: Colors.black,
+        foregroundColor: Colors.white,
         titleTextStyle: ThemeTypography.headlineSmall.copyWith(
           color: Colors.white,
         ),
@@ -145,6 +159,18 @@ class AppTheme {
       buttonTheme: ButtonThemeData(
         buttonColor: Colors.white,
         textTheme: ButtonTextTheme.accent,
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(35),
+          ),
+          textStyle: ThemeTypography.bodyLarge.copyWith(
+            color: Colors.black,
+          ),
+          foregroundColor: Colors.black,
+        ),
       ),
     );
   }

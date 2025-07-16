@@ -34,16 +34,6 @@ final GoRouter router = GoRouter(
         StatefulShellBranch(
           routes: [
             GoRoute(
-              path: '/add-subscription',
-              builder: (BuildContext context, GoRouterState state) {
-                return AddSubscriptionScreen();
-              },
-            ),
-          ],
-        ),
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
               path: '/settings',
               builder: (BuildContext context, GoRouterState state) {
                 return SettingsScreen();
@@ -60,9 +50,15 @@ final GoRouter router = GoRouter(
       },
     ),
     GoRoute(
-      path: '/',
+      path: '/welcome',
       builder: (BuildContext context, GoRouterState state) {
         return WelcomeScreen();
+      },
+    ),
+    GoRoute(
+      path: '/add-subscription',
+      builder: (BuildContext context, GoRouterState state) {
+        return AddSubscriptionScreen();
       },
     ),
   ],
