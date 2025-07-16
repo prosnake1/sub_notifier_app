@@ -15,6 +15,7 @@ final _textTheme = TextTheme(
   displaySmall: ThemeTypography.displaySmall,
   headlineLarge: ThemeTypography.headlineLarge,
   headlineSmall: ThemeTypography.headlineSmall,
+  titleLarge: ThemeTypography.titleLarge,
   bodyLarge: ThemeTypography.bodyLarge,
   bodySmall: ThemeTypography.bodySmall,
   labelLarge: ThemeTypography.labelLarge,
@@ -56,6 +57,30 @@ class AppTheme {
       iconTheme: IconThemeData(
         color: Colors.black,
       ),
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: ThemeColors.textIconExtraLow,
+        isDense: true,
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide.none,
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide.none,
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(
+            color: Colors.black,
+            width: 3,
+          ),
+        ),
+      ),
+      buttonTheme: ButtonThemeData(
+        buttonColor: Colors.black,
+        textTheme: ButtonTextTheme.accent,
+      ),
     );
   }
 
@@ -96,6 +121,30 @@ class AppTheme {
       ),
       iconTheme: IconThemeData(
         color: Colors.white,
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: ThemeColors.textIconPrimaryExtraLow,
+        isDense: true,
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide.none,
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide.none,
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(
+            color: Colors.white,
+            width: 3,
+          ),
+        ),
+      ),
+      buttonTheme: ButtonThemeData(
+        buttonColor: Colors.white,
+        textTheme: ButtonTextTheme.accent,
       ),
     );
   }

@@ -32,11 +32,11 @@ class WelcomeScreen extends StatelessWidget {
                 children: [
                   Text(
                     'добро пожаловать',
-                    style: ThemeTypography.displaySmall,
+                    style: Theme.of(context).textTheme.displaySmall,
                   ),
                   Text(
                     'следить за подписками теперь куда проще',
-                    style: ThemeTypography.labelLarge,
+                    style: Theme.of(context).textTheme.labelLarge,
                   ),
                   20.ph,
                   TextButton(
@@ -44,18 +44,15 @@ class WelcomeScreen extends StatelessWidget {
                       getIt.get<UserRepository>().setWelcomeViewed(true);
                       router.go('/home');
                     },
-                    style: TextButton.styleFrom(
-                      backgroundColor: Colors.black,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                    ),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 40),
                       child: Text(
                         'вперед',
                         style: ThemeTypography.headlineSmall.copyWith(
-                          color: Colors.white,
+                          color:
+                              (Theme.of(context).brightness == Brightness.dark)
+                                  ? Colors.black
+                                  : Colors.white,
                         ),
                       ),
                     ),
@@ -77,9 +74,7 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                   Text(
                     'v1.0',
-                    style: ThemeTypography.labelLarge.copyWith(
-                      color: ThemeColors.textIconLow,
-                    ),
+                    style: Theme.of(context).textTheme.labelLarge,
                   )
                 ],
               ),

@@ -16,17 +16,13 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   final _userRepository = getIt<UserRepository>();
   final _themeCubit = getIt<ThemeCubit>();
-  @override
-  void initState() {
-    talker.debug('Темная тема ${_userRepository.isDark}');
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: SnAppBar(title: 'Настройки'),
       body: GridView.count(
+        physics: NeverScrollableScrollPhysics(),
         crossAxisCount: 2,
         mainAxisSpacing: 20,
         crossAxisSpacing: 20,
@@ -45,7 +41,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
           SettingsButton(
             preferenceKey: 'isEnabledNotifications',
             icon: SnIcons.notification,
+            disabledIcon: SnIcons.notification_off,
             text: 'уведомления',
+            onTap: () {},
+          ),
+          SettingsButton(
+            icon: SnIcons.language,
+            text: 'язык',
             onTap: () {},
           ),
         ],
