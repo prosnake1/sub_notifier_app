@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sub_notifier_app/app.dart';
 import 'package:sub_notifier_app/i18n/strings.g.dart';
 import 'package:sub_notifier_app/locator/di.dart';
+import 'package:sub_notifier_app/services/services.dart';
 
 void main() async {
   runZonedGuarded(
@@ -15,7 +15,7 @@ void main() async {
       final SharedPreferences preferences =
           await SharedPreferences.getInstance();
 
-      await Hive.initFlutter();
+      await HiveService.init();
 
       setupLocator(preferences: preferences);
 

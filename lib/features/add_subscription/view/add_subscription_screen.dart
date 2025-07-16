@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:sub_notifier_app/bloc/subscriptions/subscription_bloc.dart';
 import 'package:sub_notifier_app/extensions/widget_extension.dart';
 import 'package:sub_notifier_app/icons/sn_icons.dart';
+import 'package:sub_notifier_app/locator/di.dart';
 import 'package:sub_notifier_app/routes/router.dart';
 import 'package:sub_notifier_app/theme/theme.dart';
 import 'package:sub_notifier_app/widgets/widgets.dart';
+import 'package:uuid/uuid.dart';
 
 class AddSubscriptionScreen extends StatefulWidget {
   const AddSubscriptionScreen({super.key});
@@ -13,6 +16,8 @@ class AddSubscriptionScreen extends StatefulWidget {
 }
 
 class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
+  final _subscriptionBloc = getIt<SubscriptionBloc>();
+  final _nameController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -69,6 +74,7 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
                   ],
                 ),
                 SnTextField(
+                  controller: _nameController,
                   labelText: 'название',
                 ),
                 SnTextField(
@@ -90,6 +96,12 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
                 100.ph,
                 ElevatedButton(
                   onPressed: () {
+                    _subscriptionBloc.add(
+                      CreateSubscription(
+                        id: Uuid().v4(),
+                        name: _nameController.text,
+                      ),
+                    );
                     router.go('/home');
                   },
                   child: Text(
