@@ -12,6 +12,7 @@ class ThemeColors {
   static const Color textIconPrimaryDefault = ThemePalette.white100;
   static const Color textIconPrimaryMed = ThemePalette.white80;
   static const Color textIconPrimaryLow = ThemePalette.white30;
+  static const Color textIconPrimaryExtraLow = ThemePalette.white10;
 
   static const Color appBarDefault = ThemePalette.secondary;
 }

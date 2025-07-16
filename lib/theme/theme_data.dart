@@ -27,7 +27,6 @@ class AppTheme {
       brightness: Brightness.light,
       colorScheme: ColorScheme.fromSeed(
         seedColor: Colors.white,
-        secondary: Colors.black,
         brightness: Brightness.light,
       ),
       fontFamily: 'Arial',
@@ -65,13 +64,16 @@ class AppTheme {
       brightness: Brightness.dark,
       colorScheme: ColorScheme.fromSeed(
         seedColor: Colors.black,
-        secondary: Colors.white,
         brightness: Brightness.dark,
       ),
       fontFamily: 'Arial',
-      textTheme: _textTheme,
+      textTheme: _textTheme.apply(
+        bodyColor: Colors.white,
+        displayColor: Colors.white,
+        decorationColor: Colors.white,
+      ),
       useMaterial3: true,
-      scaffoldBackgroundColor: ThemeColors.textIconDefault,
+      scaffoldBackgroundColor: Colors.black,
       appBarTheme: AppBarTheme(
         backgroundColor: Colors.black,
         titleTextStyle: ThemeTypography.headlineSmall.copyWith(

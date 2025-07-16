@@ -20,7 +20,10 @@ class SnAppBar extends StatelessWidget implements PreferredSizeWidget {
           ? []
           : [
               SnIconButton(
-                icon: Icon(SnIcons.notification),
+                icon: Icon(
+                  SnIcons.notification,
+                  color: Theme.of(context).iconTheme.color,
+                ),
                 onTap: () {},
               ),
             ],

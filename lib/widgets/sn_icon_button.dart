@@ -21,7 +21,6 @@ class SnIconButton extends StatelessWidget {
     return IconButton(
       icon: icon,
       onPressed: onTap,
-      color: color,
       iconSize: _getIconSize(),
     );
   }
