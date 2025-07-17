@@ -5,18 +5,22 @@ class SnTextField extends StatelessWidget {
   const SnTextField({
     super.key,
     this.controller,
+    this.onTap,
     required this.labelText,
     this.readOnly = false,
     this.icon,
     this.borderEnabled = false,
     this.iconEnabled = false,
+    this.maxLines,
   });
   final TextEditingController? controller;
+  final Function()? onTap;
   final String labelText;
   final bool readOnly;
   final IconData? icon;
   final bool borderEnabled;
   final bool iconEnabled;
+  final int? maxLines;
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +33,11 @@ class SnTextField extends StatelessWidget {
             style: Theme.of(context).textTheme.titleLarge,
           ),
           TextFormField(
+            onTap: onTap,
+            maxLines: maxLines,
             controller: controller,
             readOnly: readOnly,
             decoration: InputDecoration(
-              fillColor: readOnly ? Colors.transparent : null,
               enabledBorder: borderEnabled
                   ? OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),

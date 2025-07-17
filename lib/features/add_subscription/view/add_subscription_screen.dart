@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:sub_notifier_app/bloc/subscriptions/subscription_bloc.dart';
+import 'package:sub_notifier_app/constants/constants.dart';
 import 'package:sub_notifier_app/extensions/widget_extension.dart';
-import 'package:sub_notifier_app/icons/sn_icons.dart';
 import 'package:sub_notifier_app/locator/di.dart';
 import 'package:sub_notifier_app/routes/router.dart';
 import 'package:sub_notifier_app/theme/theme.dart';
@@ -18,6 +19,8 @@ class AddSubscriptionScreen extends StatefulWidget {
 class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
   final _subscriptionBloc = getIt<SubscriptionBloc>();
   final _nameController = TextEditingController();
+  final _notificationController = TextEditingController();
+  final _dateController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -37,7 +40,14 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
                   spacing: 10,
                   children: [
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (context) {
+                            return Container();
+                          },
+                        );
+                      },
                       radius: 15,
                       child: Container(
                         height: 130,
@@ -64,7 +74,7 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
                             style: Theme.of(context).textTheme.headlineSmall,
                           ),
                           Text(
-                            'вы можете выбрать любую из предложенных, либо загрузить свою в формате PNG, JPEG, SVG',
+                            'вы можете выбрать любую из предложенных подписок, либо создать свою',
                             style: Theme.of(context).textTheme.labelSmall,
                             maxLines: 4,
                           )
@@ -78,22 +88,42 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
                   labelText: 'название',
                 ),
                 SnTextField(
-                  labelText: 'дата окончания',
-                ),
-                SnTextField(
-                  labelText: 'напоминание',
-                ),
-                SnTextField(
-                  labelText: 'метод оплаты (необязательно)',
-                ),
-                SnTextField(
-                  labelText: 'цвет фона',
-                  icon: SnIcons.circle_add,
+                  controller: _dateController,
+                  labelText: 'дата оплаты',
                   readOnly: true,
-                  borderEnabled: true,
-                  iconEnabled: true,
+                  onTap: () async {
+                    DateTime? dateTime = await showDatePicker(
+                      context: context,
+                      firstDate: DateTime.now(),
+                      lastDate: DateTime(2099),
+                    );
+                    if (dateTime != null) {
+                      final formatted =
+                          DateFormat('d MMMM yyyy').format(dateTime);
+                      _dateController.text = formatted.toString();
+                    }
+                  },
                 ),
-                100.ph,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Flexible(
+                      child: SnTextField(
+                        controller: _notificationController,
+                        labelText: 'напоминание',
+                        readOnly: true,
+                        onTap: () {
+                          showNotificationChoices(context);
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                SnTextField(
+                  labelText: 'заметки',
+                  maxLines: 7,
+                ),
+                20.ph,
                 ElevatedButton(
                   onPressed: () {
                     _subscriptionBloc.add(
@@ -113,6 +143,45 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  Future<dynamic> showNotificationChoices(BuildContext context) {
+    return showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return Container(
+          width: double.infinity,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              20.ph,
+              Text(
+                'Напоминание',
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+              ListView.builder(
+                scrollDirection: Axis.vertical,
+                itemCount: DataConstants.notificationChoices.length,
+                shrinkWrap: true,
+                itemBuilder: (context, i) {
+                  final choice = DataConstants.notificationChoices[i];
+                  return ListTile(
+                    onTap: () {
+                      _notificationController.text = choice['text'];
+                      router.pop();
+                    },
+                    title: Text(
+                      DataConstants.notificationChoices[i]['text'],
+                    ),
+                  );
+                },
+              )
+            ],
+          ),
+        );
+      },
     );
   }
 }
