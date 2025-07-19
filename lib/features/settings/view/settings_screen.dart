@@ -39,13 +39,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
             },
           ),
           SettingsButton(
-            preferenceKey: 'isEnabledNotifications',
-            icon: SnIcons.notification,
-            disabledIcon: SnIcons.notification_off,
-            text: 'уведомления',
-            onTap: () {},
-          ),
-          SettingsButton(
             icon: SnIcons.language,
             text: 'язык',
             onTap: () {},

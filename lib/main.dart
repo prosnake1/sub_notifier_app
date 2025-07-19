@@ -18,7 +18,6 @@ void main() async {
       await HiveService.init();
 
       setupLocator(preferences: preferences);
-
       runApp(TranslationProvider(child: const SubNotifierApp()));
     },
     (error, stack) {
