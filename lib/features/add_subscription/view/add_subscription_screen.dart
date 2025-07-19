@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:sub_notifier_app/bloc/subscriptions/subscription_bloc.dart';
 import 'package:sub_notifier_app/constants/constants.dart';
 import 'package:sub_notifier_app/extensions/extensions.dart';
@@ -23,6 +26,7 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
   final iconLabels = DataConstants.subIconLabels;
 
   String? imageUrl;
+  File? imageFile;
 
   final _subscriptionBloc = getIt<SubscriptionBloc>();
   final _nameController = TextEditingController();
@@ -65,10 +69,9 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
                             ? SvgPicture.asset(
                                 imageUrl!,
                               )
-                            : Icon(
-                                Icons.add,
-                                size: 50,
-                              ),
+                            : (imageFile != null)
+                                ? Image.file(imageFile!)
+                                : Icon(SnIcons.circle_add),
                       ),
                     ),
                     Expanded(
@@ -178,7 +181,9 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
                 itemBuilder: (context, i) {
                   if (i == 0) {
                     return InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        _pickGalleryImage();
+                      },
                       child: Column(
                         children: [
                           Expanded(
@@ -268,5 +273,12 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
         );
       },
     );
+  }
+
+  Future _pickGalleryImage() async {
+    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (image == null) return null;
+    imageFile = File(image.path);
+    setState(() {});
   }
 }
