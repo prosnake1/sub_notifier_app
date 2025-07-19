@@ -17,4 +17,36 @@ class DataConstants {
       'days': 30,
     },
   ];
+
+  static const List<String> subIcons = [
+    'amazon-music.svg',
+    'amazon-prime.svg',
+    'discord.svg',
+    'disney.svg',
+    'kinopoisk.svg',
+    'netflix.svg',
+    'spotify.svg',
+    'telegram.svg',
+    'xbox.svg',
+    'youtube.svg',
+    'ivi.svg',
+    'yandex-music.svg',
+    'okko.svg',
+  ];
+
+  static const List<String> subIconLabels = [
+    'Amazon Music',
+    'Amazon Prime',
+    'Discord Nitro',
+    'Disney+',
+    'Kinopoisk',
+    'Netflix',
+    'Spotify',
+    'Telegram',
+    'Xbox',
+    'YouTube',
+    'Ivi',
+    'Yandex Music',
+    'Okko',
+  ];
 }

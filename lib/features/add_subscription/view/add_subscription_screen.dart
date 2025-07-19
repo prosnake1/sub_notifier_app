@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sub_notifier_app/bloc/subscriptions/subscription_bloc.dart';
 import 'package:sub_notifier_app/constants/constants.dart';
 import 'package:sub_notifier_app/extensions/extensions.dart';
+import 'package:sub_notifier_app/icons/sn_icons.dart';
 import 'package:sub_notifier_app/locator/di.dart';
 import 'package:sub_notifier_app/routes/router.dart';
 import 'package:sub_notifier_app/theme/theme.dart';
@@ -16,6 +18,12 @@ class AddSubscriptionScreen extends StatefulWidget {
 }
 
 class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
+  final notificationChoices = DataConstants.notificationChoices;
+  final icons = DataConstants.subIcons;
+  final iconLabels = DataConstants.subIconLabels;
+
+  String? imageUrl;
+
   final _subscriptionBloc = getIt<SubscriptionBloc>();
   final _nameController = TextEditingController();
   final _notificationController = TextEditingController();
@@ -53,10 +61,14 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
                                   : ThemeColors.textIconExtraLow,
                           borderRadius: BorderRadius.circular(15),
                         ),
-                        child: Icon(
-                          Icons.add,
-                          size: 50,
-                        ),
+                        child: (imageUrl != null)
+                            ? SvgPicture.asset(
+                                imageUrl!,
+                              )
+                            : Icon(
+                                Icons.add,
+                                size: 50,
+                              ),
                       ),
                     ),
                     Expanded(
@@ -68,7 +80,7 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
                             style: Theme.of(context).textTheme.headlineSmall,
                           ),
                           Text(
-                            'вы можете выбрать любую из предложенных подписок, либо создать свою',
+                            'вы можете выбрать любую из предложенных подписок, либо загрузить свою',
                             style: Theme.of(context).textTheme.labelSmall,
                             maxLines: 4,
                           )
@@ -106,12 +118,7 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
                         controller: _notificationController,
                         labelText: 'напоминание',
                         readOnly: true,
-                        onTap: () {
-                          showNotificationChoices(
-                            context,
-                            DataConstants.notificationChoices,
-                          );
-                        },
+                        onTap: () => showNotificationChoices(context),
                       ),
                     ),
                   ],
@@ -146,6 +153,7 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
   Future<dynamic> showIconChoices(BuildContext context) {
     return showModalBottomSheet(
       context: context,
+      isScrollControlled: true,
       builder: (context) {
         return Container(
           color: (Theme.of(context).brightness == Brightness.light)
@@ -163,13 +171,53 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
               ),
               GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 6,
+                  crossAxisCount: 4,
                 ),
                 shrinkWrap: true,
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  return Icon(
-                    Icons.android,
+                itemCount: icons.length,
+                itemBuilder: (context, i) {
+                  if (i == 0) {
+                    return InkWell(
+                      onTap: () {},
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: Icon(
+                              SnIcons.circle_add,
+                              size: 40,
+                            ),
+                          ),
+                          Text(
+                            'Загрузить',
+                            style: Theme.of(context).textTheme.labelLarge,
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+                  return SizedBox(
+                    child: InkWell(
+                      onTap: () {
+                        imageUrl = 'assets/images/services/${icons[i]}';
+                        router.pop();
+                        setState(() {});
+                      },
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: SvgPicture.asset(
+                              'assets/images/services/${icons[i]}',
+                              width: 40,
+                              height: 60,
+                            ),
+                          ),
+                          Text(
+                            iconLabels[i],
+                            style: Theme.of(context).textTheme.labelLarge,
+                          ),
+                        ],
+                      ),
+                    ),
                   );
                 },
               )
@@ -180,7 +228,7 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
     );
   }
 
-  Future<dynamic> showNotificationChoices(BuildContext context, notifications) {
+  Future<dynamic> showNotificationChoices(BuildContext context) {
     return showModalBottomSheet(
       context: context,
       builder: (context) {
@@ -200,10 +248,10 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
               ),
               ListView.builder(
                 scrollDirection: Axis.vertical,
-                itemCount: notifications.length,
+                itemCount: notificationChoices.length,
                 shrinkWrap: true,
                 itemBuilder: (context, i) {
-                  final choice = notifications[i];
+                  final choice = notificationChoices[i];
                   return ListTile(
                     onTap: () {
                       _notificationController.text = choice['text'];
