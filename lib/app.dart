@@ -22,7 +22,11 @@ class SubNotifierApp extends StatelessWidget {
           themeMode: ThemeMode.system,
           darkTheme: AppTheme.darkTheme,
           routerConfig: router,
-          localizationsDelegates: [GlobalMaterialLocalizations.delegate],
+          localizationsDelegates: [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
           supportedLocales: [
             const Locale('en'),
             const Locale('ru'),

@@ -8,13 +8,31 @@ class LoadSubscriptions extends SubscriptionEvent {
 }
 
 class CreateSubscription extends SubscriptionEvent {
-  CreateSubscription({required this.id, required this.name});
+  CreateSubscription({
+    required this.id,
+    required this.name,
+    required this.whenNotify,
+    required this.whenPay,
+    this.imageUrl,
+    this.notes,
+  });
 
   final String id;
   final String name;
+  final String? imageUrl;
+  final DateTime whenPay;
+  final DateTime whenNotify;
+  final String? notes;
 
   @override
-  List<Object?> get props => [id, name];
+  List<Object?> get props => [
+        id,
+        name,
+        imageUrl,
+        whenPay,
+        whenNotify,
+        notes,
+      ];
 }
 
 class RemoveSubscription extends SubscriptionEvent {

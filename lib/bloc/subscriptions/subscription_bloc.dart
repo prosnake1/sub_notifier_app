@@ -20,7 +20,12 @@ class SubscriptionBloc extends Bloc<SubscriptionEvent, SubscriptionState> {
       final subscription = SubscriptionModel(
         id: event.id,
         name: event.name,
+        imageUrl: event.imageUrl,
+        whenPay: event.whenPay,
+        whenNotify: event.whenNotify,
+        notes: event.notes,
       );
+      talker.info(subscription);
       _subscriptionBox.put(event.id, subscription);
       talker.info('Подписка добавлена ${subscription.name}');
       final subscriptions =

@@ -19,17 +19,29 @@ class SubscriptionModelAdapter extends TypeAdapter<SubscriptionModel> {
     return SubscriptionModel(
       id: fields[0] as String,
       name: fields[1] as String,
+      whenPay: fields[3] as DateTime,
+      whenNotify: fields[4] as DateTime,
+      imageUrl: fields[2] as String?,
+      notes: fields[5] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, SubscriptionModel obj) {
     writer
-      ..writeByte(2)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.name);
+      ..write(obj.name)
+      ..writeByte(2)
+      ..write(obj.imageUrl)
+      ..writeByte(3)
+      ..write(obj.whenPay)
+      ..writeByte(4)
+      ..write(obj.whenNotify)
+      ..writeByte(5)
+      ..write(obj.notes);
   }
 
   @override

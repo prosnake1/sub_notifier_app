@@ -26,11 +26,16 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
   final iconLabels = DataConstants.subIconLabels;
 
   String? imageUrl;
-  File? imageFile;
+
+  int? notifyBeforeDays;
+
+  DateTime? whenPay;
 
   final _subscriptionBloc = getIt<SubscriptionBloc>();
+
   final _nameController = TextEditingController();
   final _notificationController = TextEditingController();
+  final _notesController = TextEditingController();
   final _dateController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -65,12 +70,13 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
                                   : ThemeColors.textIconExtraLow,
                           borderRadius: BorderRadius.circular(15),
                         ),
-                        child: (imageUrl != null)
-                            ? SvgPicture.asset(
-                                imageUrl!,
-                              )
-                            : (imageFile != null)
-                                ? Image.file(imageFile!)
+                        child: (imageUrl != null && imageUrl!.contains('.svg'))
+                            ? SvgPicture.asset(imageUrl!)
+                            : (imageUrl != null)
+                                ? Image.file(
+                                    File(imageUrl!),
+                                    fit: BoxFit.fill,
+                                  )
                                 : Icon(SnIcons.circle_add),
                       ),
                     ),
@@ -107,6 +113,7 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
                       lastDate: DateTime(2099),
                       locale: const Locale("ru", "RU"),
                     );
+                    whenPay = dateTime;
                     if (dateTime != null) {
                       final formatted = dateTime.toLocalDate();
                       _dateController.text = formatted.toString();
@@ -127,16 +134,29 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
                   ],
                 ),
                 SnTextField(
+                  controller: _notesController,
                   labelText: 'заметки',
                   maxLines: 7,
                 ),
                 20.ph,
                 ElevatedButton(
                   onPressed: () {
+                    if (_nameController.text.isEmpty) return;
+                    // if (_notesController.text.isEmpty) return;
+                    if (_dateController.text.isEmpty) return;
+                    if (_notificationController.text.isEmpty) return;
+
+                    DateTime whenNotify =
+                        whenPay!.subtract(Duration(days: notifyBeforeDays!));
+
                     _subscriptionBloc.add(
                       CreateSubscription(
                         id: Uuid().v4(),
                         name: _nameController.text,
+                        whenNotify: whenNotify,
+                        whenPay: whenPay!,
+                        imageUrl: imageUrl,
+                        notes: _notesController.text,
                       ),
                     );
                     router.go('/home');
@@ -259,6 +279,7 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
                   final choice = notificationChoices[i];
                   return ListTile(
                     onTap: () {
+                      notifyBeforeDays = choice['days'];
                       _notificationController.text = choice['text'];
                       router.pop();
                     },
@@ -278,7 +299,9 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
   Future _pickGalleryImage() async {
     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (image == null) return null;
-    imageFile = File(image.path);
+    imageUrl = image.path;
+
+    router.pop();
     setState(() {});
   }
 }
