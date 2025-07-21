@@ -20,7 +20,7 @@
     "notes": "Notes",
     "save": "Save",
     "about": "More details",
-    "charge_off": "Charge off: $whenPay",
+    "charge_off": "Pay on $whenPay",
     "delete": "Delete",
     "remind_before": {
         "day": "Remind 1 day before",

@@ -34,6 +34,7 @@ dependencies:
   flutter_timezone: ^4.1.1
   flutter_local_notifications: ^19.3.1
   cupertino_icons: ^1.0.8
+  lottie: ^3.3.1
 
 dev_dependencies:
   flutter_test:
@@ -53,6 +54,7 @@ flutter:
   assets:
     - assets/images/services/
     - assets/icon/
+    - assets/lottie/
 
   fonts:
     - family: Arial
@@ -72,7 +74,7 @@ flutter_launcher_icons:
   min_sdk_android: 21 
   windows:
     generate: true
-    image_path: "path/to/image.png"
+    image_path: "assets/icon/icon.png"
   macos:
     generate: true
-    image_path: "path/to/image.png"
+    image_path: "assets/icon/icon.png"

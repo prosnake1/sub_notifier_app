@@ -36,7 +36,6 @@ class _HomeScreenState extends State<HomeScreen> {
             state.subscriptions.sort(
               (a, b) => a.whenNotify.compareTo(b.whenNotify),
             );
-
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: ListView.separated(
@@ -142,6 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: SizedBox(
                         height: 110,
                         child: Stack(
+                          alignment: Alignment.centerLeft,
                           clipBehavior: Clip.antiAlias,
                           children: [
                             Positioned.fill(
@@ -155,8 +155,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                             ),
-                            Align(
-                              alignment: Alignment.centerRight,
+                            Positioned(
+                              right: -25,
                               child: (sub.imageUrl != null &&
                                       sub.imageUrl!.contains(
                                         '.svg',

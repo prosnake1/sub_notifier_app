@@ -60,7 +60,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get notes => 'Notes';
 	String get save => 'Save';
 	String get about => 'More details';
-	String charge_off({required Object whenPay}) => 'Charge off: ${whenPay}';
+	String charge_off({required Object whenPay}) => 'Pay on ${whenPay}';
 	String get delete => 'Delete';
 	late final TranslationsRemindBeforeEn remind_before = TranslationsRemindBeforeEn._(_root);
 	late final TranslationsSubEn sub = TranslationsSubEn._(_root);
@@ -142,7 +142,7 @@ extension on Translations {
 			case 'notes': return 'Notes';
 			case 'save': return 'Save';
 			case 'about': return 'More details';
-			case 'charge_off': return ({required Object whenPay}) => 'Charge off: ${whenPay}';
+			case 'charge_off': return ({required Object whenPay}) => 'Pay on ${whenPay}';
 			case 'delete': return 'Delete';
 			case 'remind_before.day': return 'Remind 1 day before';
 			case 'remind_before.three_days': return 'Remind 3 days before';

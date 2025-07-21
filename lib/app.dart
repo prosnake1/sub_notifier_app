@@ -29,6 +29,7 @@ class SubNotifierApp extends StatelessWidget {
           ],
           supportedLocales: [
             const Locale('en'),
+            const Locale('fr'),
             const Locale('ru'),
           ],
         );

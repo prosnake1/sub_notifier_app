@@ -1,2 +1,2 @@
-# sub_notifier_app
-App-Reminder to disable your paid subscriptions
+# Sub Notifier
+App that will allow you to track paid subscriptions

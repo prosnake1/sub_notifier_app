@@ -145,7 +145,7 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
                     if (_nameController.text.isEmpty) return;
                     if (_dateController.text.isEmpty) return;
                     if (_notificationController.text.isEmpty) return;
-
+                    if (notifyBeforeDays == null) return;
                     DateTime whenNotify =
                         whenPay!.subtract(Duration(days: notifyBeforeDays!));
 

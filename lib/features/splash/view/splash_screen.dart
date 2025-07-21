@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:sub_notifier_app/bloc/theme/theme_cubit.dart';
 import 'package:sub_notifier_app/domain/repositories/user/user_repository.dart';
-import 'package:sub_notifier_app/icons/sn_icons.dart';
 import 'package:sub_notifier_app/locator/di.dart';
 import 'package:sub_notifier_app/routes/router.dart';
 
@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     _themeCubit.enableTheme();
-    Future.delayed(const Duration(milliseconds: 1000), () {
+    Future.delayed(const Duration(seconds: 2), () {
       router.go(_userRepository.isViewed ? '/home' : '/welcome');
     });
     super.initState();
@@ -28,9 +28,11 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Icon(
-          SnIcons.circle_warning,
-          size: 128,
+        child: SizedBox.expand(
+          child: LottieBuilder.asset(
+            'assets/lottie/splash.json',
+            fit: BoxFit.cover,
+          ),
         ),
       ),
     );

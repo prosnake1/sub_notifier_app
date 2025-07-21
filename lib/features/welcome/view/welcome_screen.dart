@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sub_notifier_app/domain/repositories/user/user_repository.dart';
 import 'package:sub_notifier_app/extensions/extensions.dart';
+import 'package:sub_notifier_app/i18n/strings.g.dart';
 import 'package:sub_notifier_app/icons/sn_icons.dart';
 import 'package:sub_notifier_app/locator/di.dart';
 import 'package:sub_notifier_app/routes/router.dart';
@@ -22,11 +23,11 @@ class WelcomeScreen extends StatelessWidget {
               child: 1.ph,
             ),
             Text(
-              'добро пожаловать',
+              t.welcome,
               style: Theme.of(context).textTheme.displaySmall,
             ),
             Text(
-              'следить за подписками теперь куда проще',
+              t.keep_track,
               style: Theme.of(context).textTheme.labelLarge,
             ),
             20.ph,
@@ -36,7 +37,7 @@ class WelcomeScreen extends StatelessWidget {
                 router.go('/home');
               },
               child: Text(
-                'Вперед',
+                t.go,
               ),
             ),
             Expanded(
@@ -46,12 +47,11 @@ class WelcomeScreen extends StatelessWidget {
               icon: Icon(SnIcons.github),
               onTap: () async {
                 final url = Uri.parse("https://github.com/prosnake1");
-
                 await launchUrl(url);
               },
             ),
             Text(
-              'v1.0',
+              'Test Launch',
               style: Theme.of(context).textTheme.labelLarge,
             ),
           ],

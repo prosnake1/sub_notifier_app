@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:sub_notifier_app/features/change_language/widgets/widgets.dart';
 import 'package:sub_notifier_app/i18n/strings.g.dart';
 import 'package:sub_notifier_app/routes/router.dart';
-import 'package:sub_notifier_app/theme/theme_colors.dart';
 import 'package:sub_notifier_app/widgets/widgets.dart';
 
 class ChangeLanguageScreen extends StatelessWidget {
@@ -18,6 +18,7 @@ class ChangeLanguageScreen extends StatelessWidget {
         child: GridView.count(
           crossAxisCount: 2,
           crossAxisSpacing: 10,
+          mainAxisSpacing: 10,
           children: [
             LanguageButton(
               onTap: () {
@@ -33,37 +34,14 @@ class ChangeLanguageScreen extends StatelessWidget {
               },
               language: 'English',
             ),
+            LanguageButton(
+              onTap: () {
+                LocaleSettings.setLocale(AppLocale.fr);
+                router.go('/splash');
+              },
+              language: 'Français',
+            ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class LanguageButton extends StatelessWidget {
-  const LanguageButton({
-    super.key,
-    required this.onTap,
-    required this.language,
-  });
-  final Function() onTap;
-  final String language;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: (Theme.of(context).brightness == Brightness.dark)
-              ? ThemeColors.textIconPrimaryExtraLow
-              : ThemeColors.textIconExtraLow,
-          borderRadius: BorderRadius.circular(15),
-        ),
-        child: Text(
-          language,
-          style: Theme.of(context).textTheme.headlineSmall,
         ),
       ),
     );

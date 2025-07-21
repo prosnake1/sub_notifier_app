@@ -1,0 +1,45 @@
+{
+    "lang": "fr",
+    "cc": "FR",
+    "welcome": "Bienvenue",
+    "keep_track": "Suivre vos abonnements est maintenant beaucoup plus facile",
+    "go": "Aller",
+    "my_subs": "Mes abonnements",
+    "settings": "Paramètres",
+    "add": "Ajouter",
+    "theme": "Thème",
+    "icons": "Icônes",
+    "upload": "Téléverser",
+    "language": "Langue",
+    "icon_title": "Icône d’abonnement",
+    "icon_descreption": "Vous pouvez choisir l’une des icônes d’abonnement proposées ou téléverser la vôtre",
+    "new_sub": "Nouvel abonnement",
+    "name": "Nom",
+    "pay_date": "Date de paiement",
+    "reminder": "Rappel",
+    "notes": "Notes",
+    "save": "Enregistrer",
+    "about": "Plus de détails",
+    "charge_off": "Débit : $whenPay",
+    "delete": "Supprimer",
+    "remind_before": {
+        "day": "Rappeler 1 jour avant",
+        "three_days": "Rappeler 3 jours avant",
+        "week": "Rappeler 1 semaine avant",
+        "month": "Rappeler 1 mois avant"
+    },
+    "sub": {
+        "remaining": {
+            "today": "Nous vous avons rappelé aujourd’hui",
+            "tomorrow": "Nous vous rappellerons demain",
+            "two_days": "Nous vous rappellerons après-demain",
+            "three_four_days": "Nous vous rappellerons dans $remainingDays jours",
+            "more_days": "Nous vous rappellerons dans $remainingDays jours",
+            "expired": "Rappel expiré"
+        }
+    },
+    "notification": {
+        "title": "Dépêchez-vous de désactiver l’abonnement ❗",
+        "body": "Nous vous rappelons de désactiver $sub avant qu’il ne soit trop tard 😏"
+    }
+}
