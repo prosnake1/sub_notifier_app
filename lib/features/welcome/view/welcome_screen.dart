@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sub_notifier_app/domain/repositories/user/user_repository.dart';
 import 'package:sub_notifier_app/extensions/extensions.dart';
+import 'package:sub_notifier_app/i18n/strings.g.dart';
 import 'package:sub_notifier_app/icons/sn_icons.dart';
 import 'package:sub_notifier_app/locator/di.dart';
 import 'package:sub_notifier_app/routes/router.dart';
-import 'package:sub_notifier_app/theme/theme.dart';
 import 'package:sub_notifier_app/widgets/sn_icon_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -14,75 +14,45 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Stack(
-          alignment: Alignment.center,
+      body: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Positioned(
-              top: 1,
-              left: 1,
-              child: SnIconButton(
-                icon: Icon(SnIcons.language),
-                onTap: () {},
+            Expanded(
+              child: 1.ph,
+            ),
+            Text(
+              t.welcome,
+              style: Theme.of(context).textTheme.displaySmall,
+            ),
+            Text(
+              t.keep_track,
+              style: Theme.of(context).textTheme.labelLarge,
+            ),
+            20.ph,
+            ElevatedButton(
+              onPressed: () {
+                getIt.get<UserRepository>().setWelcomeViewed(true);
+                router.go('/home');
+              },
+              child: Text(
+                t.go,
               ),
             ),
-            Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'добро пожаловать',
-                    style: ThemeTypography.displaySmall,
-                  ),
-                  Text(
-                    'следить за подписками теперь куда проще',
-                    style: ThemeTypography.labelLarge,
-                  ),
-                  20.ph,
-                  TextButton(
-                    onPressed: () {
-                      getIt.get<UserRepository>().setWelcomeViewed(true);
-                      router.go('/home');
-                    },
-                    style: TextButton.styleFrom(
-                      backgroundColor: Colors.black,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 40),
-                      child: Text(
-                        'вперед',
-                        style: ThemeTypography.headlineSmall.copyWith(
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  )
-                ],
-              ),
+            Expanded(
+              child: 1.ph,
             ),
-            Positioned(
-              bottom: 1,
-              child: Column(
-                children: [
-                  SnIconButton(
-                    icon: Icon(SnIcons.github),
-                    onTap: () async {
-                      final url = Uri.parse("https://github.com/prosnake1");
-
-                      await launchUrl(url);
-                    },
-                  ),
-                  Text(
-                    'v1.0',
-                    style: ThemeTypography.labelLarge.copyWith(
-                      color: ThemeColors.textIconLow,
-                    ),
-                  )
-                ],
-              ),
+            SnIconButton(
+              icon: Icon(SnIcons.github),
+              onTap: () async {
+                final url = Uri.parse("https://github.com/prosnake1");
+                await launchUrl(url);
+              },
+            ),
+            Text(
+              'Test Launch',
+              style: Theme.of(context).textTheme.labelLarge,
             ),
           ],
         ),

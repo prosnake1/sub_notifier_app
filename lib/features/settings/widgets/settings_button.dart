@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:sub_notifier_app/domain/repositories/user/user_repository.dart';
 import 'package:sub_notifier_app/extensions/extensions.dart';
 import 'package:sub_notifier_app/locator/di.dart';
+import 'package:sub_notifier_app/theme/theme.dart';
 import 'package:sub_notifier_app/theme/theme_colors.dart';
-import 'package:sub_notifier_app/theme/theme_typography.dart';
 
 class SettingsButton extends StatefulWidget {
   const SettingsButton({
     super.key,
-    required this.preferenceKey,
+    this.preferenceKey = '',
     required this.icon,
     this.disabledIcon,
     required this.text,
@@ -49,7 +49,9 @@ class _SettingsButtonState extends State<SettingsButton> {
       borderRadius: BorderRadius.circular(15),
       child: Container(
         decoration: BoxDecoration(
-          color: ThemeColors.textIconExtraLow,
+          color: (Theme.of(context).brightness == Brightness.dark)
+              ? ThemeColors.textIconPrimaryExtraLow
+              : ThemeColors.textIconExtraLow,
           borderRadius: BorderRadius.circular(15),
         ),
         child: Column(
@@ -64,7 +66,7 @@ class _SettingsButtonState extends State<SettingsButton> {
             ),
             Text(
               widget.text,
-              style: ThemeTypography.bodyLarge,
+              style: Theme.of(context).textTheme.bodyLarge,
             ),
           ],
         ),
@@ -74,6 +76,7 @@ class _SettingsButtonState extends State<SettingsButton> {
 
   Future<void> _getStatus() async {
     final prefs = _userRepository.preferences;
+
     final value = prefs.getBool(widget.preferenceKey) ?? false;
     if (widget.disabledIcon != null) {
       setState(() {

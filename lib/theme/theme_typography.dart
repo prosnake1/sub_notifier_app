@@ -16,6 +16,11 @@ class ThemeTypography {
     fontWeight: FontWeight.bold,
   );
 
+  static const TextStyle titleLarge = TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.bold,
+  );
+
   static const TextStyle bodyLarge = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.bold,

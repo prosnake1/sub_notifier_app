@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sub_notifier_app/i18n/strings.g.dart';
 import 'package:sub_notifier_app/icons/sn_icons.dart';
-import 'package:sub_notifier_app/theme/theme_typography.dart';
+import 'package:sub_notifier_app/routes/router.dart';
+import 'package:sub_notifier_app/theme/theme.dart';
 
 class SnNavigationBar extends StatelessWidget {
   const SnNavigationBar({
@@ -13,7 +15,17 @@ class SnNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = changeItemColor();
+    Color getColor(int currentIndex) {
+      final isDark = (Theme.of(context).brightness == Brightness.dark);
+      if (currentIndex == navigationShell.currentIndex) {
+        return isDark ? Colors.white : Colors.black;
+      } else {
+        return isDark
+            ? ThemeColors.textIconPrimaryLow
+            : ThemeColors.textIconLow;
+      }
+    }
+
     return Scaffold(
       body: navigationShell,
       bottomNavigationBar: BottomAppBar(
@@ -28,7 +40,6 @@ class SnNavigationBar extends StatelessWidget {
                 enableFeedback: false,
                 onTap: () {
                   navigationShell.goBranch(0);
-                  changeItemColor();
                 },
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -36,12 +47,13 @@ class SnNavigationBar extends StatelessWidget {
                     Icon(
                       SnIcons.clipboard,
                       size: 35,
-                      color: colors[0],
+                      color: getColor(0),
                     ),
                     Text(
-                      'Мои подписки',
-                      style:
-                          ThemeTypography.bodySmall.copyWith(color: colors[0]),
+                      t.my_subs,
+                      style: ThemeTypography.bodySmall.copyWith(
+                        color: getColor(0),
+                      ),
                     ),
                   ],
                 ),
@@ -50,16 +62,13 @@ class SnNavigationBar extends StatelessWidget {
             Expanded(
               child: TextButton(
                 onPressed: () {
-                  navigationShell.goBranch(1);
-                  changeItemColor();
+                  router.push('/add-subscription');
                 },
                 style: TextButton.styleFrom(
                   minimumSize: Size(120, 40),
                 ),
                 child: Text(
-                  (navigationShell.currentIndex != 1)
-                      ? 'Добавить'
-                      : 'Сохранить',
+                  t.add,
                   style: ThemeTypography.bodyLarge,
                 ),
               ),
@@ -68,8 +77,7 @@ class SnNavigationBar extends StatelessWidget {
               child: InkWell(
                 enableFeedback: false,
                 onTap: () {
-                  navigationShell.goBranch(2);
-                  changeItemColor();
+                  navigationShell.goBranch(1);
                 },
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -77,12 +85,12 @@ class SnNavigationBar extends StatelessWidget {
                     Icon(
                       SnIcons.settings,
                       size: 35,
-                      color: colors[2],
+                      color: getColor(1),
                     ),
                     Text(
-                      'Настройки',
+                      t.settings,
                       style: ThemeTypography.bodySmall.copyWith(
-                        color: colors[2],
+                        color: getColor(1),
                       ),
                     ),
                   ],
@@ -93,28 +101,5 @@ class SnNavigationBar extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  bool isRouteSelected(int currentIndex) {
-    if (currentIndex != navigationShell.currentIndex) {
-      return false;
-    } else {
-      return true;
-    }
-  }
-
-  Color getItemColor(
-    int currentIndex,
-  ) {
-    return isRouteSelected(currentIndex) ? Colors.black : Colors.grey;
-  }
-
-  List<Color> changeItemColor() {
-    List<Color> colors = [];
-    for (var i = 0; i < 3; i++) {
-      Color color = getItemColor(i);
-      colors.add(color);
-    }
-    return colors;
   }
 }

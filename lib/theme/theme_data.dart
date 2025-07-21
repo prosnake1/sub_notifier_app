@@ -15,6 +15,7 @@ final _textTheme = TextTheme(
   displaySmall: ThemeTypography.displaySmall,
   headlineLarge: ThemeTypography.headlineLarge,
   headlineSmall: ThemeTypography.headlineSmall,
+  titleLarge: ThemeTypography.titleLarge,
   bodyLarge: ThemeTypography.bodyLarge,
   bodySmall: ThemeTypography.bodySmall,
   labelLarge: ThemeTypography.labelLarge,
@@ -24,9 +25,10 @@ final _textTheme = TextTheme(
 class AppTheme {
   static ThemeData get lightTheme {
     return ThemeData(
+      brightness: Brightness.light,
       colorScheme: ColorScheme.fromSeed(
         seedColor: Colors.white,
-        secondary: Colors.black,
+        brightness: Brightness.light,
       ),
       fontFamily: 'Arial',
       textTheme: _textTheme,
@@ -35,6 +37,7 @@ class AppTheme {
       switchTheme: _switchTheme,
       appBarTheme: AppBarTheme(
         backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
         titleTextStyle: ThemeTypography.headlineSmall.copyWith(
           color: (Colors.black),
         ),
@@ -55,21 +58,63 @@ class AppTheme {
       iconTheme: IconThemeData(
         color: Colors.black,
       ),
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: ThemeColors.textIconExtraLow,
+        isDense: true,
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide.none,
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide.none,
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(
+            color: Colors.black,
+            width: 3,
+          ),
+        ),
+      ),
+      buttonTheme: ButtonThemeData(
+        buttonColor: Colors.black,
+        textTheme: ButtonTextTheme.accent,
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.black,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(35),
+          ),
+          textStyle: ThemeTypography.bodyLarge.copyWith(
+            color: Colors.white,
+          ),
+          foregroundColor: Colors.white,
+        ),
+      ),
     );
   }
 
   static ThemeData get darkTheme {
     return ThemeData(
+      brightness: Brightness.dark,
       colorScheme: ColorScheme.fromSeed(
         seedColor: Colors.black,
-        secondary: Colors.white,
+        brightness: Brightness.dark,
       ),
       fontFamily: 'Arial',
-      textTheme: _textTheme,
+      textTheme: _textTheme.apply(
+        bodyColor: Colors.white,
+        displayColor: Colors.white,
+        decorationColor: Colors.white,
+      ),
       useMaterial3: true,
-      scaffoldBackgroundColor: ThemeColors.textIconDefault,
+      scaffoldBackgroundColor: Colors.black,
       appBarTheme: AppBarTheme(
         backgroundColor: Colors.black,
+        foregroundColor: Colors.white,
         titleTextStyle: ThemeTypography.headlineSmall.copyWith(
           color: Colors.white,
         ),
@@ -90,6 +135,42 @@ class AppTheme {
       ),
       iconTheme: IconThemeData(
         color: Colors.white,
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: ThemeColors.textIconPrimaryExtraLow,
+        isDense: true,
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide.none,
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide.none,
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(
+            color: Colors.white,
+            width: 3,
+          ),
+        ),
+      ),
+      buttonTheme: ButtonThemeData(
+        buttonColor: Colors.white,
+        textTheme: ButtonTextTheme.accent,
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(35),
+          ),
+          textStyle: ThemeTypography.bodyLarge.copyWith(
+            color: Colors.black,
+          ),
+          foregroundColor: Colors.black,
+        ),
       ),
     );
   }

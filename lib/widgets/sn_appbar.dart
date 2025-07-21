@@ -16,14 +16,6 @@ class SnAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      actions: !notificationsEnabled
-          ? []
-          : [
-              SnIconButton(
-                icon: Icon(SnIcons.notification),
-                onTap: () {},
-              ),
-            ],
       leading: !leadingEnabled
           ? null
           : SnIconButton(

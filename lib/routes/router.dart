@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sub_notifier_app/features/add_subscription/view/add_subscription_screen.dart';
+import 'package:sub_notifier_app/features/change_language/view/change_language_screen.dart';
 import 'package:sub_notifier_app/features/home/view/home_screen.dart';
 import 'package:sub_notifier_app/features/settings/view/settings_screen.dart';
 import 'package:sub_notifier_app/features/splash/view/splash_screen.dart';
@@ -34,16 +35,6 @@ final GoRouter router = GoRouter(
         StatefulShellBranch(
           routes: [
             GoRoute(
-              path: '/add-subscription',
-              builder: (BuildContext context, GoRouterState state) {
-                return AddSubscriptionScreen();
-              },
-            ),
-          ],
-        ),
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
               path: '/settings',
               builder: (BuildContext context, GoRouterState state) {
                 return SettingsScreen();
@@ -60,9 +51,21 @@ final GoRouter router = GoRouter(
       },
     ),
     GoRoute(
-      path: '/',
+      path: '/welcome',
       builder: (BuildContext context, GoRouterState state) {
         return WelcomeScreen();
+      },
+    ),
+    GoRoute(
+      path: '/add-subscription',
+      builder: (BuildContext context, GoRouterState state) {
+        return AddSubscriptionScreen();
+      },
+    ),
+    GoRoute(
+      path: '/language',
+      builder: (BuildContext context, GoRouterState state) {
+        return ChangeLanguageScreen();
       },
     ),
   ],
