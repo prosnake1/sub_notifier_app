@@ -19,4 +19,6 @@ class SnIcons {
       IconData(0xe908, fontFamily: _snFamily);
   static const IconData moon = IconData(0xe909, fontFamily: _snFamily);
   static const IconData chevron_left = IconData(0xe90a, fontFamily: _snFamily);
+  static const IconData circle_warning =
+      IconData(0xe90b, fontFamily: _snFamily);
 }

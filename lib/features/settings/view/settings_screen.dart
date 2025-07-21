@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:sub_notifier_app/bloc/theme/theme_cubit.dart';
 import 'package:sub_notifier_app/domain/repositories/user/user_repository.dart';
 import 'package:sub_notifier_app/features/settings/widgets/widgets.dart';
+import 'package:sub_notifier_app/i18n/strings.g.dart';
 import 'package:sub_notifier_app/icons/sn_icons.dart';
 import 'package:sub_notifier_app/locator/di.dart';
+import 'package:sub_notifier_app/routes/router.dart';
 import 'package:sub_notifier_app/widgets/widgets.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -20,7 +22,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SnAppBar(title: 'Настройки'),
+      appBar: SnAppBar(title: t.settings),
       body: GridView.count(
         physics: NeverScrollableScrollPhysics(),
         crossAxisCount: 2,
@@ -32,7 +34,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             preferenceKey: 'isDarkMode',
             icon: SnIcons.sun,
             disabledIcon: SnIcons.moon,
-            text: 'тема',
+            text: t.theme,
             onTap: () {
               _userRepository.setDarkMode(!_userRepository.isDark);
               _themeCubit.enableTheme();
@@ -40,8 +42,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           SettingsButton(
             icon: SnIcons.language,
-            text: 'язык',
-            onTap: () {},
+            text: t.language,
+            onTap: () => router.push('/language'),
           ),
         ],
       ),

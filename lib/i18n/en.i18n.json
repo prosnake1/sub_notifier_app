@@ -1,5 +1,45 @@
 {
-    "welcome": "welcome",
-    "keep_track": "keeping track of your subscriptions is now much easier",
-    "go" : "go"
+    "lang": "en",
+    "cc": "US",
+    "welcome": "Welcome",
+    "keep_track": "Keeping track of your subscriptions is now much easier",
+    "go": "Go",
+    "my_subs": "My subscriptions",
+    "settings": "Settings",
+    "add": "Add",
+    "theme": "Theme",
+    "icons": "Icons",
+    "upload": "Upload",
+    "language": "Language",
+    "icon_title": "Subscription icon",
+    "icon_descreption": "You can choose one of the suggested subscription icons or upload your own",
+    "new_sub": "New subscription",
+    "name": "Name",
+    "pay_date": "Payment date",
+    "reminder": "Reminder",
+    "notes": "Notes",
+    "save": "Save",
+    "about": "More details",
+    "charge_off": "Charge off: $whenPay",
+    "delete": "Delete",
+    "remind_before": {
+        "day": "Remind 1 day before",
+        "three_days": "Remind 3 days before",
+        "week": "Remind 1 week before",
+        "month": "Remind 1 month before"
+    },
+    "sub": {
+        "remaining": {
+            "today": "We Reminded you today",
+            "tomorrow": "We'll remind you tomorrow",
+            "two_days": "We'll remind you the day after tomorrow",
+            "three_four_days": "We'll remind you in $remainingDays days",
+            "more_days": "We'll remind you in $remainingDays days",
+            "expired": "Reminder expired"
+        }
+    },
+    "notification": {
+        "title": "Hurry up and disable Subscription ❗",
+        "body": "We remind you to disable $sub before it's too late😏"
+    }
 }

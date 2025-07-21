@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:sub_notifier_app/bloc/subscriptions/subscription_bloc.dart';
 import 'package:sub_notifier_app/constants/constants.dart';
 import 'package:sub_notifier_app/extensions/extensions.dart';
+import 'package:sub_notifier_app/i18n/strings.g.dart';
 import 'package:sub_notifier_app/icons/sn_icons.dart';
 import 'package:sub_notifier_app/locator/di.dart';
 import 'package:sub_notifier_app/routes/router.dart';
@@ -21,7 +22,7 @@ class AddSubscriptionScreen extends StatefulWidget {
 }
 
 class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
-  final notificationChoices = DataConstants.notificationChoices;
+  final notificationChoices = DataConstants.reminderChoices;
   final icons = DataConstants.subIcons;
   final iconLabels = DataConstants.subIconLabels;
 
@@ -43,8 +44,7 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: SnAppBar(
-          title: 'Новая подписка',
-          notificationsEnabled: false,
+          title: t.new_sub,
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -85,11 +85,11 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Иконка подписки',
+                            t.icon_title,
                             style: Theme.of(context).textTheme.headlineSmall,
                           ),
                           Text(
-                            'вы можете выбрать любую из предложенных подписок, либо загрузить свою',
+                            t.icon_descreption,
                             style: Theme.of(context).textTheme.labelSmall,
                             maxLines: 4,
                           )
@@ -100,18 +100,19 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
                 ),
                 SnTextField(
                   controller: _nameController,
-                  labelText: 'название',
+                  labelText: t.name,
+                  maxLength: 16,
                 ),
                 SnTextField(
                   controller: _dateController,
-                  labelText: 'дата оплаты',
+                  labelText: t.pay_date,
                   readOnly: true,
                   onTap: () async {
                     DateTime? dateTime = await showDatePicker(
                       context: context,
                       firstDate: DateTime.now(),
                       lastDate: DateTime(2099),
-                      locale: const Locale("ru", "RU"),
+                      locale: Locale(t.lang, t.cc),
                     );
                     whenPay = dateTime;
                     if (dateTime != null) {
@@ -126,7 +127,7 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
                     Flexible(
                       child: SnTextField(
                         controller: _notificationController,
-                        labelText: 'напоминание',
+                        labelText: t.reminder,
                         readOnly: true,
                         onTap: () => showNotificationChoices(context),
                       ),
@@ -135,14 +136,13 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
                 ),
                 SnTextField(
                   controller: _notesController,
-                  labelText: 'заметки',
+                  labelText: t.notes,
                   maxLines: 7,
                 ),
                 20.ph,
                 ElevatedButton(
                   onPressed: () {
                     if (_nameController.text.isEmpty) return;
-                    // if (_notesController.text.isEmpty) return;
                     if (_dateController.text.isEmpty) return;
                     if (_notificationController.text.isEmpty) return;
 
@@ -162,7 +162,7 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
                     router.go('/home');
                   },
                   child: Text(
-                    'Сохранить',
+                    t.save,
                   ),
                 ),
               ],
@@ -189,7 +189,7 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
             children: [
               20.ph,
               Text(
-                'Иконки',
+                t.icons,
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               GridView.builder(
@@ -213,7 +213,7 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
                             ),
                           ),
                           Text(
-                            'Загрузить',
+                            t.upload,
                             style: Theme.of(context).textTheme.labelLarge,
                           ),
                         ],
@@ -284,7 +284,7 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
                       router.pop();
                     },
                     title: Text(
-                      DataConstants.notificationChoices[i]['text'],
+                      DataConstants.reminderChoices[i]['text'],
                     ),
                   );
                 },

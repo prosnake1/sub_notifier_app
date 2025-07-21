@@ -12,6 +12,7 @@ class SnTextField extends StatelessWidget {
     this.borderEnabled = false,
     this.iconEnabled = false,
     this.maxLines = 1,
+    this.maxLength = 50,
   });
   final TextEditingController? controller;
   final Function()? onTap;
@@ -21,6 +22,7 @@ class SnTextField extends StatelessWidget {
   final bool borderEnabled;
   final bool iconEnabled;
   final int maxLines;
+  final int maxLength;
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +38,10 @@ class SnTextField extends StatelessWidget {
             onTap: onTap,
             maxLines: maxLines,
             controller: controller,
+            maxLength: maxLength,
             readOnly: readOnly,
             decoration: InputDecoration(
+              counterText: '',
               enabledBorder: borderEnabled
                   ? OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),

@@ -2,7 +2,9 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:sub_notifier_app/domain/repositories/subscription/subscription.dart';
+import 'package:sub_notifier_app/i18n/strings.g.dart';
 import 'package:sub_notifier_app/locator/di.dart';
+import 'package:sub_notifier_app/services/services.dart';
 
 part 'subscription_event.dart';
 part 'subscription_state.dart';
@@ -27,9 +29,17 @@ class SubscriptionBloc extends Bloc<SubscriptionEvent, SubscriptionState> {
       );
       talker.info(subscription);
       _subscriptionBox.put(event.id, subscription);
+      NotiService().scheduleNotification(
+        id: subscription.id.hashCode,
+        title: t.notification.title,
+        body: t.notification.body(sub: subscription.name),
+        dateTime: event.whenNotify,
+      );
+
       talker.info('Подписка добавлена ${subscription.name}');
       final subscriptions =
           _subscriptionBox.values.toList().cast<SubscriptionModel>();
+
       emit(SubscriptionLoaded(
         subscriptions: subscriptions,
       ));
@@ -42,7 +52,6 @@ class SubscriptionBloc extends Bloc<SubscriptionEvent, SubscriptionState> {
 
   Future<void> _loadSubscriptions(event, emit) async {
     try {
-      emit(SubscriptionLoading());
       final subscriptions =
           _subscriptionBox.values.toList().cast<SubscriptionModel>();
       emit(SubscriptionLoaded(
@@ -57,9 +66,9 @@ class SubscriptionBloc extends Bloc<SubscriptionEvent, SubscriptionState> {
 
   Future<void> _removeSubscription(event, emit) async {
     try {
-      // final subscriptions =
-      //     _subscriptionBox.values.toList().cast<SubscriptionModel>();
+      NotiService().cancelNotification(id: event.id.hashCode);
       _subscriptionBox.delete(event.id);
+      talker.info('Подписка удалена');
     } catch (e) {
       emit(SubscriptionError(
         error: e,

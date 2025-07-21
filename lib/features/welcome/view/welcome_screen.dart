@@ -13,61 +13,46 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Stack(
-          alignment: Alignment.center,
+      body: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Positioned(
-              top: 1,
-              left: 1,
-              child: SnIconButton(
-                icon: Icon(SnIcons.language),
-                onTap: () {},
+            Expanded(
+              child: 1.ph,
+            ),
+            Text(
+              'добро пожаловать',
+              style: Theme.of(context).textTheme.displaySmall,
+            ),
+            Text(
+              'следить за подписками теперь куда проще',
+              style: Theme.of(context).textTheme.labelLarge,
+            ),
+            20.ph,
+            ElevatedButton(
+              onPressed: () {
+                getIt.get<UserRepository>().setWelcomeViewed(true);
+                router.go('/home');
+              },
+              child: Text(
+                'Вперед',
               ),
             ),
-            Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'добро пожаловать',
-                    style: Theme.of(context).textTheme.displaySmall,
-                  ),
-                  Text(
-                    'следить за подписками теперь куда проще',
-                    style: Theme.of(context).textTheme.labelLarge,
-                  ),
-                  20.ph,
-                  ElevatedButton(
-                    onPressed: () {
-                      getIt.get<UserRepository>().setWelcomeViewed(true);
-                      router.go('/home');
-                    },
-                    child: Text(
-                      'Вперед',
-                    ),
-                  )
-                ],
-              ),
+            Expanded(
+              child: 1.ph,
             ),
-            Positioned(
-              bottom: 1,
-              child: Column(
-                children: [
-                  SnIconButton(
-                    icon: Icon(SnIcons.github),
-                    onTap: () async {
-                      final url = Uri.parse("https://github.com/prosnake1");
+            SnIconButton(
+              icon: Icon(SnIcons.github),
+              onTap: () async {
+                final url = Uri.parse("https://github.com/prosnake1");
 
-                      await launchUrl(url);
-                    },
-                  ),
-                  Text(
-                    'v1.0',
-                    style: Theme.of(context).textTheme.labelLarge,
-                  )
-                ],
-              ),
+                await launchUrl(url);
+              },
+            ),
+            Text(
+              'v1.0',
+              style: Theme.of(context).textTheme.labelLarge,
             ),
           ],
         ),

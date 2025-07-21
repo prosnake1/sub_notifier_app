@@ -9,8 +9,6 @@ sealed class SubscriptionState extends Equatable {
 
 class SubscriptionInitial extends SubscriptionState {}
 
-class SubscriptionLoading extends SubscriptionState {}
-
 class SubscriptionLoaded extends SubscriptionState {
   const SubscriptionLoaded({required this.subscriptions});
 

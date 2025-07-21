@@ -30,44 +30,49 @@ dependencies:
   intl: ^0.19.0
   image_picker: ^1.1.2
   fluttertoast: ^8.2.12
-
+  timezone: ^0.10.1
+  flutter_timezone: ^4.1.1
+  flutter_local_notifications: ^19.3.1
   cupertino_icons: ^1.0.8
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  flutter_lints: ^5.0.0
+
   build_runner: ^2.5.4
   hive_generator: ^2.0.1
-  
-  
-  flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.14.4
 
 
 flutter:
-
+  
   uses-material-design: true
 
-  # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/services/
-  #   - images/a_dot_ham.jpeg
-
-  # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/to/resolution-aware-images
-
-  # For details regarding adding assets from package dependencies, see
-  # https://flutter.dev/to/asset-from-package
+    - assets/icon/
 
   fonts:
     - family: Arial
       fonts:
         - asset: fonts/arialmt.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
     - family: Archivo Black
       fonts:
         - asset: fonts/ArchivoBlack-Regular.ttf
     - family: SN Icons
       fonts:
         - asset: fonts/icons/sn_icons.ttf
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icon/icon.png"
+  min_sdk_android: 21 
+  windows:
+    generate: true
+    image_path: "path/to/image.png"
+  macos:
+    generate: true
+    image_path: "path/to/image.png"

@@ -18,7 +18,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     _themeCubit.enableTheme();
-
     Future.delayed(const Duration(milliseconds: 1000), () {
       router.go(_userRepository.isViewed ? '/home' : '/welcome');
     });
@@ -27,11 +26,11 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
         child: Icon(
-          SnIcons.clipboard,
-          size: 100,
+          SnIcons.circle_warning,
+          size: 128,
         ),
       ),
     );

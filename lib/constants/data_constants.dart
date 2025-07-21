@@ -1,19 +1,21 @@
+import 'package:sub_notifier_app/i18n/strings.g.dart';
+
 class DataConstants {
-  static const List<Map<String, dynamic>> notificationChoices = [
+  static List<Map<String, dynamic>> reminderChoices = [
     {
-      'text': 'Напомнить за 1 день',
+      'text': t.remind_before.day,
       'days': 1,
     },
     {
-      'text': 'Напомнить за 3 дня',
+      'text': t.remind_before.three_days,
       'days': 3,
     },
     {
-      'text': 'Напомнить за неделю',
+      'text': t.remind_before.week,
       'days': 7,
     },
     {
-      'text': 'Напомнить за месяц',
+      'text': t.remind_before.month,
       'days': 30,
     },
   ];

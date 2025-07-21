@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sub_notifier_app/bloc/subscriptions/subscription_bloc.dart';
 import 'package:sub_notifier_app/extensions/extensions.dart';
+import 'package:sub_notifier_app/i18n/strings.g.dart';
 import 'package:sub_notifier_app/locator/di.dart';
 import 'package:sub_notifier_app/routes/router.dart';
 import 'package:sub_notifier_app/theme/theme_colors.dart';
@@ -27,11 +28,15 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SnAppBar(title: 'Мои подписки'),
+      appBar: SnAppBar(title: t.my_subs),
       body: BlocBuilder<SubscriptionBloc, SubscriptionState>(
         bloc: _subscriptionBloc,
         builder: (context, state) {
           if (state is SubscriptionLoaded) {
+            state.subscriptions.sort(
+              (a, b) => a.whenNotify.compareTo(b.whenNotify),
+            );
+
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: ListView.separated(
@@ -42,17 +47,23 @@ class _HomeScreenState extends State<HomeScreen> {
                   final remainingDays =
                       sub.whenPay.difference(DateTime.now()).inDays;
                   String remainingText = '';
-                  switch (remainingDays) {
-                    case 1:
-                      remainingText = 'напомним завтра';
-                    case 2:
-                      remainingText = 'напомним послезавтра';
-                    case 3:
-                      remainingText = 'напомним через $remainingDays дня';
-                    case 4:
-                      remainingText = 'напомним через $remainingDays дня';
-                    default:
-                      remainingText = 'напомним через $remainingDays дней';
+                  if (remainingDays >= 0) {
+                    switch (remainingDays) {
+                      case 0:
+                        remainingText = t.sub.remaining.today;
+                      case 1:
+                        remainingText = t.sub.remaining.tomorrow;
+                      case 2:
+                        remainingText = t.sub.remaining.two_days;
+                      case 3 && 4:
+                        remainingText = t.sub.remaining
+                            .three_four_days(remainingDays: remainingDays);
+                      default:
+                        remainingText = t.sub.remaining
+                            .more_days(remainingDays: remainingDays);
+                    }
+                  } else {
+                    remainingText = t.sub.remaining.expired;
                   }
                   return InkWell(
                     onTap: () {
@@ -67,13 +78,30 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                ListTile(
-                                  title: Text('Подробнее'),
-                                  trailing: Icon(
-                                    Icons.info_outline,
-                                  ),
-                                  onTap: () {},
+                                Text(
+                                  sub.name,
+                                  style: Theme.of(context).textTheme.titleLarge,
                                 ),
+                                (sub.notes!.isNotEmpty)
+                                    ? ListTile(
+                                        title: Text(
+                                          sub.notes ?? "",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleMedium!
+                                              .copyWith(
+                                                color: (Theme.of(context)
+                                                            .brightness ==
+                                                        Brightness.light)
+                                                    ? Colors.black
+                                                    : Colors.white,
+                                              ),
+                                        ),
+                                        onTap: () {
+                                          router.pop();
+                                        },
+                                      )
+                                    : 1.ph,
                                 ListTile(
                                   onTap: () {
                                     _subscriptionBloc.add(
@@ -85,7 +113,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                     router.pop();
                                   },
                                   title: Text(
-                                    'Удалить',
+                                    t.delete,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium!
+                                        .copyWith(
+                                          color:
+                                              (Theme.of(context).brightness ==
+                                                      Brightness.light)
+                                                  ? Colors.black
+                                                  : Colors.white,
+                                        ),
                                   ),
                                   trailing: Icon(
                                     Icons.delete,
@@ -151,9 +189,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                         .copyWith(
                                           fontFamily: 'Archivo Black',
                                         ),
+                                    overflow: TextOverflow.ellipsis,
                                   ),
                                   Text(
-                                    'Списание: ${sub.whenPay.toLocalDate()}',
+                                    t.charge_off(
+                                        whenPay: sub.whenPay.toLocalDate()),
                                     style:
                                         Theme.of(context).textTheme.bodySmall,
                                   ),
@@ -181,19 +221,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
-// (sub.imageUrl != null &&
-//                                     sub.imageUrl!.contains(
-//                                       '.svg',
-//                                     ))
-//                                 ? SvgPicture.asset(
-//                                     sub.imageUrl!,
-//                                     width: 150,
-//                                   )
-//                                 : (sub.imageUrl != null)
-//                                     ? Image.file(
-//                                         File(
-//                                           sub.imageUrl!,
-//                                         ),
-//                                       )
-//                                     : SizedBox(),

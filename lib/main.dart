@@ -11,6 +11,7 @@ void main() async {
     () async {
       WidgetsFlutterBinding.ensureInitialized();
       LocaleSettings.useDeviceLocale();
+      NotiService().init();
 
       final SharedPreferences preferences =
           await SharedPreferences.getInstance();

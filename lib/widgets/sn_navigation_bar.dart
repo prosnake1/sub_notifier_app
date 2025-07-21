@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sub_notifier_app/i18n/strings.g.dart';
 import 'package:sub_notifier_app/icons/sn_icons.dart';
 import 'package:sub_notifier_app/routes/router.dart';
 import 'package:sub_notifier_app/theme/theme.dart';
@@ -49,7 +50,7 @@ class SnNavigationBar extends StatelessWidget {
                       color: getColor(0),
                     ),
                     Text(
-                      'Мои подписки',
+                      t.my_subs,
                       style: ThemeTypography.bodySmall.copyWith(
                         color: getColor(0),
                       ),
@@ -67,7 +68,7 @@ class SnNavigationBar extends StatelessWidget {
                   minimumSize: Size(120, 40),
                 ),
                 child: Text(
-                  'Добавить',
+                  t.add,
                   style: ThemeTypography.bodyLarge,
                 ),
               ),
@@ -87,7 +88,7 @@ class SnNavigationBar extends StatelessWidget {
                       color: getColor(1),
                     ),
                     Text(
-                      'Настройки',
+                      t.settings,
                       style: ThemeTypography.bodySmall.copyWith(
                         color: getColor(1),
                       ),
