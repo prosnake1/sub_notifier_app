@@ -15,3 +15,5 @@
 ✨Ability to create hundreds of reminders <br>
 ✨Fast and Small App size <br>
 ✨Modern and Comfortable Design <br>
+<h1>🤝Open For Contributing</h1>
+<p>We love contributions from the community!</p>
