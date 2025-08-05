@@ -17,6 +17,7 @@
     "name": "Nom",
     "pay_date": "Date de paiement",
     "reminder": "Rappel",
+    "when_remind": "Rappeler",
     "notes": "Notes",
     "save": "Enregistrer",
     "about": "Plus de détails",
@@ -37,6 +38,9 @@
             "more_days": "Nous vous rappellerons dans $remainingDays jours",
             "expired": "Rappel expiré"
         }
+    },
+    "warnings": {
+        "edit_restricted" : "L'édition n'est pas encore disponible"
     },
     "notification": {
         "title": "Dépêchez-vous de désactiver l’abonnement ❗",

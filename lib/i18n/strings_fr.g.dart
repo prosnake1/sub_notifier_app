@@ -54,6 +54,7 @@ class TranslationsFr implements Translations {
 	@override String get name => 'Nom';
 	@override String get pay_date => 'Date de paiement';
 	@override String get reminder => 'Rappel';
+	@override String get when_remind => 'Rappeler';
 	@override String get notes => 'Notes';
 	@override String get save => 'Enregistrer';
 	@override String get about => 'Plus de détails';
@@ -61,6 +62,7 @@ class TranslationsFr implements Translations {
 	@override String get delete => 'Supprimer';
 	@override late final _TranslationsRemindBeforeFr remind_before = _TranslationsRemindBeforeFr._(_root);
 	@override late final _TranslationsSubFr sub = _TranslationsSubFr._(_root);
+	@override late final _TranslationsWarningsFr warnings = _TranslationsWarningsFr._(_root);
 	@override late final _TranslationsNotificationFr notification = _TranslationsNotificationFr._(_root);
 }
 
@@ -85,6 +87,16 @@ class _TranslationsSubFr implements TranslationsSubEn {
 
 	// Translations
 	@override late final _TranslationsSubRemainingFr remaining = _TranslationsSubRemainingFr._(_root);
+}
+
+// Path: warnings
+class _TranslationsWarningsFr implements TranslationsWarningsEn {
+	_TranslationsWarningsFr._(this._root);
+
+	final TranslationsFr _root; // ignore: unused_field
+
+	// Translations
+	@override String get edit_restricted => 'L\'édition n\'est pas encore disponible';
 }
 
 // Path: notification
@@ -136,6 +148,7 @@ extension on TranslationsFr {
 			case 'name': return 'Nom';
 			case 'pay_date': return 'Date de paiement';
 			case 'reminder': return 'Rappel';
+			case 'when_remind': return 'Rappeler';
 			case 'notes': return 'Notes';
 			case 'save': return 'Enregistrer';
 			case 'about': return 'Plus de détails';
@@ -151,6 +164,7 @@ extension on TranslationsFr {
 			case 'sub.remaining.three_four_days': return ({required Object remainingDays}) => 'Nous vous rappellerons dans ${remainingDays} jours';
 			case 'sub.remaining.more_days': return ({required Object remainingDays}) => 'Nous vous rappellerons dans ${remainingDays} jours';
 			case 'sub.remaining.expired': return 'Rappel expiré';
+			case 'warnings.edit_restricted': return 'L\'édition n\'est pas encore disponible';
 			case 'notification.title': return 'Dépêchez-vous de désactiver l’abonnement ❗';
 			case 'notification.body': return ({required Object sub}) => 'Nous vous rappelons de désactiver ${sub} avant qu’il ne soit trop tard 😏';
 			default: return null;

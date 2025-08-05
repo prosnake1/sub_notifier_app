@@ -7,6 +7,15 @@ class LoadSubscriptions extends SubscriptionEvent {
   List<Object?> get props => [];
 }
 
+class LoadSubscription extends SubscriptionEvent {
+  LoadSubscription({required this.id});
+
+  final String id;
+
+  @override
+  List<Object?> get props => [id];
+}
+
 class CreateSubscription extends SubscriptionEvent {
   CreateSubscription({
     required this.id,

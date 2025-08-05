@@ -54,6 +54,7 @@ class TranslationsRu implements Translations {
 	@override String get name => 'Название';
 	@override String get pay_date => 'Дата оплаты';
 	@override String get reminder => 'Напоминание';
+	@override String get when_remind => 'Напомним';
 	@override String get notes => 'Заметки';
 	@override String get save => 'Сохранить';
 	@override String get about => 'Подробнее';
@@ -61,6 +62,7 @@ class TranslationsRu implements Translations {
 	@override String get delete => 'Удалить';
 	@override late final _TranslationsRemindBeforeRu remind_before = _TranslationsRemindBeforeRu._(_root);
 	@override late final _TranslationsSubRu sub = _TranslationsSubRu._(_root);
+	@override late final _TranslationsWarningsRu warnings = _TranslationsWarningsRu._(_root);
 	@override late final _TranslationsNotificationRu notification = _TranslationsNotificationRu._(_root);
 }
 
@@ -85,6 +87,16 @@ class _TranslationsSubRu implements TranslationsSubEn {
 
 	// Translations
 	@override late final _TranslationsSubRemainingRu remaining = _TranslationsSubRemainingRu._(_root);
+}
+
+// Path: warnings
+class _TranslationsWarningsRu implements TranslationsWarningsEn {
+	_TranslationsWarningsRu._(this._root);
+
+	final TranslationsRu _root; // ignore: unused_field
+
+	// Translations
+	@override String get edit_restricted => 'Редактирование пока недоступно';
 }
 
 // Path: notification
@@ -136,6 +148,7 @@ extension on TranslationsRu {
 			case 'name': return 'Название';
 			case 'pay_date': return 'Дата оплаты';
 			case 'reminder': return 'Напоминание';
+			case 'when_remind': return 'Напомним';
 			case 'notes': return 'Заметки';
 			case 'save': return 'Сохранить';
 			case 'about': return 'Подробнее';
@@ -151,6 +164,7 @@ extension on TranslationsRu {
 			case 'sub.remaining.three_four_days': return ({required Object remainingDays}) => 'Напомним через ${remainingDays} дня';
 			case 'sub.remaining.more_days': return ({required Object remainingDays}) => 'Напомним через ${remainingDays} дней';
 			case 'sub.remaining.expired': return 'Напоминание просрочено';
+			case 'warnings.edit_restricted': return 'Редактирование пока недоступно';
 			case 'notification.title': return 'Скорее отключи подписку ❗';
 			case 'notification.body': return ({required Object sub}) => 'Напоминаем тебе отключить ${sub} пока не поздно😏';
 			default: return null;

@@ -17,6 +17,7 @@
     "name": "Name",
     "pay_date": "Payment date",
     "reminder": "Reminder",
+    "when_remind": "We will Remind you in",
     "notes": "Notes",
     "save": "Save",
     "about": "More details",
@@ -37,6 +38,9 @@
             "more_days": "We'll remind you in $remainingDays days",
             "expired": "Reminder expired"
         }
+    },
+    "warnings": {
+        "edit_restricted" : "Editing is not available yet"
     },
     "notification": {
         "title": "Hurry up and disable Subscription ❗",

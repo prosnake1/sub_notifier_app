@@ -57,6 +57,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get name => 'Name';
 	String get pay_date => 'Payment date';
 	String get reminder => 'Reminder';
+	String get when_remind => 'We will Remind you in';
 	String get notes => 'Notes';
 	String get save => 'Save';
 	String get about => 'More details';
@@ -64,6 +65,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get delete => 'Delete';
 	late final TranslationsRemindBeforeEn remind_before = TranslationsRemindBeforeEn._(_root);
 	late final TranslationsSubEn sub = TranslationsSubEn._(_root);
+	late final TranslationsWarningsEn warnings = TranslationsWarningsEn._(_root);
 	late final TranslationsNotificationEn notification = TranslationsNotificationEn._(_root);
 }
 
@@ -88,6 +90,16 @@ class TranslationsSubEn {
 
 	// Translations
 	late final TranslationsSubRemainingEn remaining = TranslationsSubRemainingEn._(_root);
+}
+
+// Path: warnings
+class TranslationsWarningsEn {
+	TranslationsWarningsEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get edit_restricted => 'Editing is not available yet';
 }
 
 // Path: notification
@@ -139,6 +151,7 @@ extension on Translations {
 			case 'name': return 'Name';
 			case 'pay_date': return 'Payment date';
 			case 'reminder': return 'Reminder';
+			case 'when_remind': return 'We will Remind you in';
 			case 'notes': return 'Notes';
 			case 'save': return 'Save';
 			case 'about': return 'More details';
@@ -154,6 +167,7 @@ extension on Translations {
 			case 'sub.remaining.three_four_days': return ({required Object remainingDays}) => 'We\'ll remind you in ${remainingDays} days';
 			case 'sub.remaining.more_days': return ({required Object remainingDays}) => 'We\'ll remind you in ${remainingDays} days';
 			case 'sub.remaining.expired': return 'Reminder expired';
+			case 'warnings.edit_restricted': return 'Editing is not available yet';
 			case 'notification.title': return 'Hurry up and disable Subscription ❗';
 			case 'notification.body': return ({required Object sub}) => 'We remind you to disable ${sub} before it\'s too late😏';
 			default: return null;

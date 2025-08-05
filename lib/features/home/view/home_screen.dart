@@ -28,11 +28,13 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SnAppBar(title: t.my_subs),
+      appBar: SnAppBar(
+        title: Text(t.my_subs),
+      ),
       body: BlocBuilder<SubscriptionBloc, SubscriptionState>(
         bloc: _subscriptionBloc,
         builder: (context, state) {
-          if (state is SubscriptionLoaded) {
+          if (state is SubscriptionsLoaded) {
             state.subscriptions.sort(
               (a, b) => a.whenNotify.compareTo(b.whenNotify),
             );
@@ -66,72 +68,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   }
                   return InkWell(
                     onTap: () {
-                      showModalBottomSheet(
-                        context: context,
-                        builder: (context) {
-                          return Container(
-                            color: (Theme.of(context).brightness ==
-                                    Brightness.light)
-                                ? Colors.white
-                                : Colors.black,
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(
-                                  sub.name,
-                                  style: Theme.of(context).textTheme.titleLarge,
-                                ),
-                                (sub.notes!.isNotEmpty)
-                                    ? ListTile(
-                                        title: Text(
-                                          sub.notes ?? "",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .titleMedium!
-                                              .copyWith(
-                                                color: (Theme.of(context)
-                                                            .brightness ==
-                                                        Brightness.light)
-                                                    ? Colors.black
-                                                    : Colors.white,
-                                              ),
-                                        ),
-                                        onTap: () {
-                                          router.pop();
-                                        },
-                                      )
-                                    : 1.ph,
-                                ListTile(
-                                  onTap: () {
-                                    _subscriptionBloc.add(
-                                      RemoveSubscription(id: sub.id),
-                                    );
-                                    _subscriptionBloc.add(
-                                      LoadSubscriptions(),
-                                    );
-                                    router.pop();
-                                  },
-                                  title: Text(
-                                    t.delete,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .titleMedium!
-                                        .copyWith(
-                                          color:
-                                              (Theme.of(context).brightness ==
-                                                      Brightness.light)
-                                                  ? Colors.black
-                                                  : Colors.white,
-                                        ),
-                                  ),
-                                  trailing: Icon(
-                                    Icons.delete,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
-                        },
+                      router.pushNamed(
+                        'sub',
+                        pathParameters: {'id': sub.id},
                       );
                     },
                     child: Padding(
@@ -164,15 +103,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ? SvgPicture.asset(
                                       sub.imageUrl!,
                                       width: 150,
-                                      height: 150,
-                                      fit: BoxFit.cover,
                                     )
                                   : (sub.imageUrl != null)
                                       ? Image.file(
                                           File(sub.imageUrl!),
                                           width: 150,
-                                          height: 150,
-                                          fit: BoxFit.cover,
                                         )
                                       : SizedBox(),
                             ),

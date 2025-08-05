@@ -1,24 +1,24 @@
 import 'package:sub_notifier_app/i18n/strings.g.dart';
 
 class DataConstants {
-  static List<Map<String, dynamic>> reminderChoices = [
-    {
-      'text': t.remind_before.day,
-      'days': 1,
-    },
-    {
-      'text': t.remind_before.three_days,
-      'days': 3,
-    },
-    {
-      'text': t.remind_before.week,
-      'days': 7,
-    },
-    {
-      'text': t.remind_before.month,
-      'days': 30,
-    },
-  ];
+  static List<Map<String, dynamic>> get reminderChoices => [
+        {
+          'text': t.remind_before.day,
+          'days': 1,
+        },
+        {
+          'text': t.remind_before.three_days,
+          'days': 3,
+        },
+        {
+          'text': t.remind_before.week,
+          'days': 7,
+        },
+        {
+          'text': t.remind_before.month,
+          'days': 30,
+        },
+      ];
 
   static const List<String> subIcons = [
     'amazon-music.svg',

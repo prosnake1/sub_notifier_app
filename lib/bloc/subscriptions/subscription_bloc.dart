@@ -14,6 +14,7 @@ class SubscriptionBloc extends Bloc<SubscriptionEvent, SubscriptionState> {
   SubscriptionBloc(this._subscriptionBox) : super(SubscriptionInitial()) {
     on<CreateSubscription>(_createSubscription);
     on<LoadSubscriptions>(_loadSubscriptions);
+    on<LoadSubscription>(_loadSubscription);
     on<RemoveSubscription>(_removeSubscription);
   }
 
@@ -36,11 +37,11 @@ class SubscriptionBloc extends Bloc<SubscriptionEvent, SubscriptionState> {
         dateTime: event.whenNotify,
       );
 
-      talker.info('Подписка добавлена ${subscription.name}');
+      talker.info('Subscription added ${subscription.name}');
       final subscriptions =
           _subscriptionBox.values.toList().cast<SubscriptionModel>();
 
-      emit(SubscriptionLoaded(
+      emit(SubscriptionsLoaded(
         subscriptions: subscriptions,
       ));
     } catch (e) {
@@ -54,8 +55,21 @@ class SubscriptionBloc extends Bloc<SubscriptionEvent, SubscriptionState> {
     try {
       final subscriptions =
           _subscriptionBox.values.toList().cast<SubscriptionModel>();
-      emit(SubscriptionLoaded(
+      emit(SubscriptionsLoaded(
         subscriptions: subscriptions,
+      ));
+    } catch (e) {
+      emit(SubscriptionError(
+        error: e,
+      ));
+    }
+  }
+
+  Future<void> _loadSubscription(event, emit) async {
+    try {
+      final subscription = _subscriptionBox.get(event.id);
+      emit(SubscriptionLoaded(
+        subscription: subscription,
       ));
     } catch (e) {
       emit(SubscriptionError(
@@ -68,7 +82,7 @@ class SubscriptionBloc extends Bloc<SubscriptionEvent, SubscriptionState> {
     try {
       NotiService().cancelNotification(id: event.id.hashCode);
       _subscriptionBox.delete(event.id);
-      talker.info('Подписка удалена');
+      talker.info('Subscription Removed');
     } catch (e) {
       emit(SubscriptionError(
         error: e,

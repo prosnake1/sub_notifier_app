@@ -16,6 +16,5 @@ Future<void> setupLocator({required SharedPreferences preferences}) async {
   getIt.registerSingleton(ThemeCubit(getIt<UserRepository>()));
 
   final subBox = await Hive.openBox<SubscriptionModel>('subscriptions_box');
-  // await subBox.clear();
   getIt.registerSingleton(SubscriptionBloc(subBox));
 }

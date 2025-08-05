@@ -22,7 +22,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SnAppBar(title: t.settings),
+      appBar: SnAppBar(title: Text(t.settings)),
       body: GridView.count(
         physics: NeverScrollableScrollPhysics(),
         crossAxisCount: 2,

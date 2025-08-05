@@ -44,7 +44,7 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: SnAppBar(
-          title: t.new_sub,
+          title: Text(t.new_sub),
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -137,7 +137,8 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
                 SnTextField(
                   controller: _notesController,
                   labelText: t.notes,
-                  maxLines: 7,
+                  maxLength: 185,
+                  maxLines: 5,
                 ),
                 20.ph,
                 ElevatedButton(
@@ -161,9 +162,7 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
                     );
                     router.go('/home');
                   },
-                  child: Text(
-                    t.save,
-                  ),
+                  child: Text(t.save),
                 ),
               ],
             ),
@@ -268,7 +267,7 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
             children: [
               20.ph,
               Text(
-                'Напоминание',
+                t.reminder,
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               ListView.builder(
