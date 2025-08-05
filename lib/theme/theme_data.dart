@@ -58,6 +58,10 @@ class AppTheme {
       iconTheme: IconThemeData(
         color: Colors.black,
       ),
+      textSelectionTheme: TextSelectionThemeData(
+        cursorColor: Colors.black,
+        selectionColor: Colors.black,
+      ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: ThemeColors.textIconExtraLow,
@@ -100,9 +104,11 @@ class AppTheme {
   static ThemeData get darkTheme {
     return ThemeData(
       brightness: Brightness.dark,
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: Colors.black,
-        brightness: Brightness.dark,
+      colorScheme: ColorScheme.dark(
+        primary: Colors.black.withValues(alpha: 0.5),
+        onPrimary: Colors.white,
+        surface: Colors.black,
+        onSurface: Colors.white,
       ),
       fontFamily: 'Arial',
       textTheme: _textTheme.apply(
@@ -136,6 +142,10 @@ class AppTheme {
       iconTheme: IconThemeData(
         color: Colors.white,
       ),
+      textSelectionTheme: TextSelectionThemeData(
+        cursorColor: Colors.white,
+        selectionColor: Colors.white,
+      ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: ThemeColors.textIconPrimaryExtraLow,
@@ -151,7 +161,7 @@ class AppTheme {
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
           borderSide: BorderSide(
-            color: Colors.white,
+            color: Colors.transparent,
             width: 3,
           ),
         ),

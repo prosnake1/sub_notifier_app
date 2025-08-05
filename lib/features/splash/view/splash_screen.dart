@@ -28,11 +28,11 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: SizedBox.expand(
-          child: LottieBuilder.asset(
-            'assets/lottie/splash.json',
-            fit: BoxFit.cover,
-          ),
+        child: LottieBuilder.asset(
+          (Theme.of(context).brightness == Brightness.dark)
+              ? 'assets/lottie/SplashLight.json'
+              : 'assets/lottie/SplashDark.json',
+          fit: BoxFit.cover,
         ),
       ),
     );

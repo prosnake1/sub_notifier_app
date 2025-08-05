@@ -24,6 +24,7 @@ dependencies:
   slang_flutter: ^4.7.0
   talker: ^4.9.2
   talker_flutter: ^4.9.2
+  talker_bloc_logger: ^4.9.2
   flutter_bloc: ^9.1.1
   url_launcher: ^6.3.2
   equatable: ^2.0.7

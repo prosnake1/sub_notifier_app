@@ -7,9 +7,9 @@ class SnTextField extends StatelessWidget {
     this.controller,
     this.onTap,
     required this.labelText,
+    this.hintText,
     this.readOnly = false,
     this.icon,
-    this.borderEnabled = false,
     this.iconEnabled = false,
     this.maxLines = 1,
     this.maxLength = 50,
@@ -17,9 +17,9 @@ class SnTextField extends StatelessWidget {
   final TextEditingController? controller;
   final Function()? onTap;
   final String labelText;
+  final String? hintText;
   final bool readOnly;
   final IconData? icon;
-  final bool borderEnabled;
   final bool iconEnabled;
   final int maxLines;
   final int maxLength;
@@ -41,18 +41,8 @@ class SnTextField extends StatelessWidget {
             maxLength: maxLength,
             readOnly: readOnly,
             decoration: InputDecoration(
+              hintText: hintText,
               counterText: '',
-              enabledBorder: borderEnabled
-                  ? OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: BorderSide(
-                        width: 4,
-                        color: (Theme.of(context).brightness == Brightness.dark)
-                            ? Colors.white
-                            : Colors.black,
-                      ),
-                    )
-                  : null,
               prefixIcon: iconEnabled
                   ? Align(
                       alignment: Alignment.center,

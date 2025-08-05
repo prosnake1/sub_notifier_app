@@ -11,7 +11,7 @@ class ChangeLanguageScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: SnAppBar(
-        title: t.language,
+        title: Text(t.language),
       ),
       body: Padding(
         padding: const EdgeInsets.all(40),

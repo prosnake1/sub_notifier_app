@@ -25,23 +25,6 @@ class NotiService {
     await notificationsPlugin.initialize(initializationSettings);
   }
 
-  Future<void> showNotification() async {
-    await notificationsPlugin.show(
-      0,
-      'test',
-      'test',
-      NotificationDetails(
-        android: AndroidNotificationDetails(
-          'test_channel_id',
-          'Test Channel',
-          channelDescription: 'Test channel',
-          importance: Importance.max,
-          priority: Priority.high,
-        ),
-      ),
-    );
-  }
-
   Future<void> scheduleNotification({
     String? title,
     String? body,
@@ -71,6 +54,4 @@ class NotiService {
   Future<void> cancelNotification({required int id}) async {
     await notificationsPlugin.cancel(id);
   }
-
-  Future<void> getPermission() async {}
 }
