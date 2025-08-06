@@ -1,4 +1,7 @@
-<h1 align="center">Sub Notifier</h1>
+
+<p align="center">
+  <img src="https://github.com/prosnake1/sub_notifier_app/blob/main/assets/banner/title.png"/>
+</p>
 <h3 align="center">📋App that will help you to manage your Paid Subscriptions and Save Money</h3>
 
 ![banner](assets/banner/banner-beta.png)
