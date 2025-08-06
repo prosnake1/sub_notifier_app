@@ -1,7 +1,7 @@
 <h1 align="center">Sub Notifier</h1>
 <h3 align="center">📋App that will help you to manage your Paid Subscriptions and Save Money</h3>
 
-![banner](assets/banner/banner.png)
+![banner](assets/banner/banner-beta.png)
 <div style="padding: 12px; margin-bottom: 16px; border: 1px solid #d1b100; border-left-width: 4px; border-radius: 6px; background-color: #fff8c5; color: black;">
   <strong>⚠️ Warning:</strong> This is a test launch. Bugs and limited  app functionality are possible. 
 </div>
