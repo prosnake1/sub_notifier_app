@@ -28,8 +28,8 @@ class SubscriptionBloc extends Bloc<SubscriptionEvent, SubscriptionState> {
         whenNotify: event.whenNotify,
         notes: event.notes,
       );
-      talker.info(subscription);
       _subscriptionBox.put(event.id, subscription);
+
       NotiService().scheduleNotification(
         id: subscription.id.hashCode,
         title: t.notification.title,
@@ -37,7 +37,6 @@ class SubscriptionBloc extends Bloc<SubscriptionEvent, SubscriptionState> {
         dateTime: event.whenNotify,
       );
 
-      talker.info('Subscription added ${subscription.name}');
       final subscriptions =
           _subscriptionBox.values.toList().cast<SubscriptionModel>();
 
