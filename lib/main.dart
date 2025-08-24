@@ -22,6 +22,7 @@ void main() async {
       await HiveService.init();
 
       setupLocator(preferences: preferences);
+
       Bloc.observer = TalkerBlocObserver(
           settings: TalkerBlocLoggerSettings(
         printStateFullData: true,

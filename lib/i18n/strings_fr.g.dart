@@ -44,6 +44,7 @@ class TranslationsFr implements Translations {
 	@override String get my_subs => 'Mes abonnements';
 	@override String get settings => 'Paramètres';
 	@override String get add => 'Ajouter';
+	@override String get kNull => 'Il n\'y a rien ici';
 	@override String get theme => 'Thème';
 	@override String get icons => 'Icônes';
 	@override String get upload => 'Téléverser';
@@ -138,6 +139,7 @@ extension on TranslationsFr {
 			case 'my_subs': return 'Mes abonnements';
 			case 'settings': return 'Paramètres';
 			case 'add': return 'Ajouter';
+			case 'kNull': return 'Il n\'y a rien ici';
 			case 'theme': return 'Thème';
 			case 'icons': return 'Icônes';
 			case 'upload': return 'Téléverser';

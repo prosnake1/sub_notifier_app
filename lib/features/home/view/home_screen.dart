@@ -8,6 +8,7 @@ import 'package:sub_notifier_app/i18n/strings.g.dart';
 import 'package:sub_notifier_app/locator/di.dart';
 import 'package:sub_notifier_app/routes/router.dart';
 import 'package:sub_notifier_app/theme/theme_colors.dart';
+import 'package:sub_notifier_app/theme/theme_typography.dart';
 import 'package:sub_notifier_app/widgets/widgets.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -35,6 +36,14 @@ class _HomeScreenState extends State<HomeScreen> {
         bloc: _subscriptionBloc,
         builder: (context, state) {
           if (state is SubscriptionsLoaded) {
+            if (state.subscriptions.isEmpty) {
+              return Center(
+                child: Text(
+                  t.kNull,
+                  style: ThemeTypography.titleLarge,
+                ),
+              );
+            }
             state.subscriptions.sort(
               (a, b) => a.whenNotify.compareTo(b.whenNotify),
             );
