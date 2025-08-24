@@ -9,7 +9,7 @@
   <strong>⚠️ Warning:</strong> This is a test launch. Bugs and limited  app functionality are possible. 
 </div>
 <h1>✅Download (Only Android)</h2>
-<a href="https://github.com/prosnake1/sub_notifier_app/releases/download/beta/sub_notifier-v0.2.0-beta.apk" download>
+<a href="https://github.com/prosnake1/sub_notifier_app/releases/download/beta/sub_notifier-v0.2.1-beta.apk" download>
   <img src="https://img.shields.io/badge/Download-APK-green?style=for-the-badge&logo=android" alt="Download APK">
 </a>
 <h1>🚀Features</h1>
