@@ -44,6 +44,7 @@ class TranslationsRu implements Translations {
 	@override String get my_subs => 'Мои подписки';
 	@override String get settings => 'Настройки';
 	@override String get add => 'Добавить';
+	@override String get kNull => 'Здесь ничего нет';
 	@override String get theme => 'Тема';
 	@override String get icons => 'Иконки';
 	@override String get upload => 'Загрузить';
@@ -138,6 +139,7 @@ extension on TranslationsRu {
 			case 'my_subs': return 'Мои подписки';
 			case 'settings': return 'Настройки';
 			case 'add': return 'Добавить';
+			case 'kNull': return 'Здесь ничего нет';
 			case 'theme': return 'Тема';
 			case 'icons': return 'Иконки';
 			case 'upload': return 'Загрузить';

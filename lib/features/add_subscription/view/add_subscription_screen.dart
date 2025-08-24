@@ -42,129 +42,133 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
-      child: Scaffold(
-        appBar: SnAppBar(
-          title: Text(t.new_sub),
-        ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              spacing: 10,
-              children: [
-                Row(
-                  spacing: 10,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        showIconChoices(context);
-                      },
-                      radius: 15,
-                      child: Container(
-                        height: 130,
-                        width: 130,
-                        decoration: BoxDecoration(
-                          color:
-                              (Theme.of(context).brightness == Brightness.dark)
-                                  ? ThemeColors.textIconPrimaryExtraLow
-                                  : ThemeColors.textIconExtraLow,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: (imageUrl != null && imageUrl!.contains('.svg'))
-                            ? SvgPicture.asset(imageUrl!)
-                            : (imageUrl != null)
-                                ? Image.file(
-                                    File(imageUrl!),
-                                    fit: BoxFit.fill,
-                                  )
-                                : Icon(SnIcons.circle_add),
-                      ),
-                    ),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            t.icon_title,
-                            style: Theme.of(context).textTheme.headlineSmall,
+      child: PopScope(
+        onPopInvokedWithResult: (didPop, result) =>
+            _subscriptionBloc.add(LoadSubscriptions()),
+        child: Scaffold(
+          appBar: SnAppBar(
+            title: Text(t.new_sub),
+          ),
+          body: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                spacing: 10,
+                children: [
+                  Row(
+                    spacing: 10,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          showIconChoices(context);
+                        },
+                        radius: 15,
+                        child: Container(
+                          height: 130,
+                          width: 130,
+                          decoration: BoxDecoration(
+                            color: (Theme.of(context).brightness ==
+                                    Brightness.dark)
+                                ? ThemeColors.textIconPrimaryExtraLow
+                                : ThemeColors.textIconExtraLow,
+                            borderRadius: BorderRadius.circular(15),
                           ),
-                          Text(
-                            t.icon_descreption,
-                            style: Theme.of(context).textTheme.labelSmall,
-                            maxLines: 4,
-                          )
-                        ],
+                          child:
+                              (imageUrl != null && imageUrl!.contains('.svg'))
+                                  ? SvgPicture.asset(imageUrl!)
+                                  : (imageUrl != null)
+                                      ? Image.file(
+                                          File(imageUrl!),
+                                          fit: BoxFit.fill,
+                                        )
+                                      : Icon(SnIcons.circle_add),
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                SnTextField(
-                  controller: _nameController,
-                  labelText: t.name,
-                  maxLength: 16,
-                ),
-                SnTextField(
-                  controller: _dateController,
-                  labelText: t.pay_date,
-                  readOnly: true,
-                  onTap: () async {
-                    DateTime? dateTime = await showDatePicker(
-                      context: context,
-                      firstDate: DateTime.now(),
-                      lastDate: DateTime(2099),
-                      locale: Locale(t.lang, t.cc),
-                    );
-                    whenPay = dateTime;
-                    if (dateTime != null) {
-                      final formatted = dateTime.toLocalDate();
-                      _dateController.text = formatted.toString();
-                    }
-                  },
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Flexible(
-                      child: SnTextField(
-                        controller: _notificationController,
-                        labelText: t.reminder,
-                        readOnly: true,
-                        onTap: () => showNotificationChoices(context),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              t.icon_title,
+                              style: Theme.of(context).textTheme.headlineSmall,
+                            ),
+                            Text(
+                              t.icon_descreption,
+                              style: Theme.of(context).textTheme.labelSmall,
+                              maxLines: 4,
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                SnTextField(
-                  controller: _notesController,
-                  labelText: t.notes,
-                  maxLength: 185,
-                  maxLines: 5,
-                ),
-                20.ph,
-                ElevatedButton(
-                  onPressed: () {
-                    if (_nameController.text.isEmpty) return;
-                    if (_dateController.text.isEmpty) return;
-                    if (_notificationController.text.isEmpty) return;
-                    if (notifyBeforeDays == null) return;
-                    DateTime whenNotify =
-                        whenPay!.subtract(Duration(days: notifyBeforeDays!));
-
-                    _subscriptionBloc.add(
-                      CreateSubscription(
-                        id: Uuid().v4(),
-                        name: _nameController.text,
-                        whenNotify: whenNotify,
-                        whenPay: whenPay!,
-                        imageUrl: imageUrl,
-                        notes: _notesController.text,
+                    ],
+                  ),
+                  SnTextField(
+                    controller: _nameController,
+                    labelText: t.name,
+                    maxLength: 16,
+                  ),
+                  SnTextField(
+                    controller: _dateController,
+                    labelText: t.pay_date,
+                    readOnly: true,
+                    onTap: () async {
+                      DateTime? dateTime = await showDatePicker(
+                        context: context,
+                        firstDate: DateTime.now(),
+                        lastDate: DateTime(2099),
+                        locale: Locale(t.lang, t.cc),
+                      );
+                      whenPay = dateTime;
+                      if (dateTime != null) {
+                        final formatted = dateTime.toLocalDate();
+                        _dateController.text = formatted.toString();
+                      }
+                    },
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Flexible(
+                        child: SnTextField(
+                          controller: _notificationController,
+                          labelText: t.reminder,
+                          readOnly: true,
+                          onTap: () => showNotificationChoices(context),
+                        ),
                       ),
-                    );
-                    router.go('/home');
-                  },
-                  child: Text(t.save),
-                ),
-              ],
+                    ],
+                  ),
+                  SnTextField(
+                    controller: _notesController,
+                    labelText: t.notes,
+                    maxLength: 185,
+                    maxLines: 5,
+                  ),
+                  20.ph,
+                  ElevatedButton(
+                    onPressed: () {
+                      if (_nameController.text.isEmpty) return;
+                      if (_dateController.text.isEmpty) return;
+                      if (_notificationController.text.isEmpty) return;
+                      if (notifyBeforeDays == null) return;
+                      DateTime whenNotify =
+                          whenPay!.subtract(Duration(days: notifyBeforeDays!));
+                      _subscriptionBloc.add(
+                        CreateSubscription(
+                          id: Uuid().v4(),
+                          name: _nameController.text,
+                          whenNotify: whenNotify,
+                          whenPay: whenPay!,
+                          imageUrl: imageUrl,
+                          notes: _notesController.text,
+                        ),
+                      );
+                      router.go('/home');
+                    },
+                    child: Text(t.save),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -280,6 +284,7 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
                     onTap: () {
                       notifyBeforeDays = choice['days'];
                       _notificationController.text = choice['text'];
+                      talker.warning(notifyBeforeDays);
                       router.pop();
                     },
                     title: Text(

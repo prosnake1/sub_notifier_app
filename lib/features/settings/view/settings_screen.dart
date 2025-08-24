@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:sub_notifier_app/bloc/theme/theme_cubit.dart';
 import 'package:sub_notifier_app/domain/repositories/user/user_repository.dart';
 import 'package:sub_notifier_app/features/settings/widgets/widgets.dart';
@@ -45,6 +47,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
             text: t.language,
             onTap: () => router.push('/language'),
           ),
+          SettingsButton(
+              icon: SnIcons.circle_information,
+              text: 'Version',
+              onTap: () async {
+                PackageInfo packageInfo = await PackageInfo.fromPlatform();
+                String version = packageInfo.version;
+
+                Fluttertoast.showToast(msg: version);
+              }),
         ],
       ),
     );

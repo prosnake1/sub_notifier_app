@@ -47,6 +47,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get my_subs => 'My subscriptions';
 	String get settings => 'Settings';
 	String get add => 'Add';
+	String get kNull => 'There\'s nothing here';
 	String get theme => 'Theme';
 	String get icons => 'Icons';
 	String get upload => 'Upload';
@@ -141,6 +142,7 @@ extension on Translations {
 			case 'my_subs': return 'My subscriptions';
 			case 'settings': return 'Settings';
 			case 'add': return 'Add';
+			case 'kNull': return 'There\'s nothing here';
 			case 'theme': return 'Theme';
 			case 'icons': return 'Icons';
 			case 'upload': return 'Upload';

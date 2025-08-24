@@ -36,92 +36,96 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
       builder: (context, state) {
         if (state is SubscriptionLoaded) {
           final sub = state.subscription;
-          return Scaffold(
-            appBar: SnAppBar(
-              title: Row(
-                spacing: 10,
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  (sub.imageUrl != null &&
-                          sub.imageUrl!.contains(
-                            '.svg',
-                          ))
-                      ? SvgPicture.asset(
-                          sub.imageUrl!,
-                          width: 40,
-                        )
-                      : (sub.imageUrl != null)
-                          ? Image.file(
-                              File(sub.imageUrl!),
-                            )
-                          : SizedBox(),
-                  Text(sub.name),
-                ],
+          return PopScope(
+            onPopInvokedWithResult: (didPop, result) =>
+                _subscriptionBloc.add(LoadSubscriptions()),
+            child: Scaffold(
+              appBar: SnAppBar(
+                title: Row(
+                  spacing: 10,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    (sub.imageUrl != null &&
+                            sub.imageUrl!.contains(
+                              '.svg',
+                            ))
+                        ? SvgPicture.asset(
+                            sub.imageUrl!,
+                            width: 40,
+                          )
+                        : (sub.imageUrl != null)
+                            ? Image.file(
+                                File(sub.imageUrl!),
+                              )
+                            : SizedBox(),
+                    Text(sub.name),
+                  ],
+                ),
+                leading: IconButton(
+                  onPressed: () {
+                    router.pop();
+                    _subscriptionBloc.add(LoadSubscriptions());
+                  },
+                  icon: Icon(Icons.arrow_back),
+                ),
               ),
-              leading: IconButton(
-                onPressed: () {
-                  router.pop();
-                  _subscriptionBloc.add(LoadSubscriptions());
-                },
-                icon: Icon(Icons.arrow_back),
-              ),
-            ),
-            body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                spacing: 10,
-                children: [
-                  SnTextField(
-                    labelText: t.name,
-                    hintText: sub.name,
-                    readOnly: true,
-                  ),
-                  SnTextField(
-                    labelText: t.pay_date,
-                    hintText: sub.whenPay.toLocalDate().toString(),
-                    readOnly: true,
-                  ),
-                  SnTextField(
-                    labelText: t.when_remind,
-                    hintText: sub.whenNotify.toLocalDate().toString(),
-                    readOnly: true,
-                  ),
-                  SnTextField(
-                    labelText: t.notes,
-                    hintText: sub.notes,
-                    maxLines: 6,
-                    readOnly: true,
-                  ),
-                  Expanded(child: SizedBox()),
-                  ElevatedButton(
-                    onPressed: () {
-                      _subscriptionBloc.add(RemoveSubscription(id: sub.id));
-                      router.pop();
-                      _subscriptionBloc.add(LoadSubscriptions());
-                    },
-                    child: Text(t.delete),
-                  ),
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: 20),
-                    decoration: BoxDecoration(
-                      color: ThemeColors.textIconPrimaryExtraLow,
-                      borderRadius: BorderRadius.circular(15),
+              body: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  spacing: 10,
+                  children: [
+                    SnTextField(
+                      labelText: t.name,
+                      hintText: sub.name,
+                      readOnly: true,
                     ),
-                    child: Row(
-                      spacing: 10,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(SnIcons.circle_warning),
-                        Text(
-                          t.warnings.edit_restricted,
-                          style: ThemeTypography.labelLarge,
-                        ),
-                      ],
+                    SnTextField(
+                      labelText: t.pay_date,
+                      hintText: sub.whenPay.toLocalDate().toString(),
+                      readOnly: true,
                     ),
-                  ),
-                  5.ph,
-                ],
+                    SnTextField(
+                      labelText: t.when_remind,
+                      hintText: sub.whenNotify.toLocalDate().toString(),
+                      readOnly: true,
+                    ),
+                    SnTextField(
+                      labelText: t.notes,
+                      hintText: sub.notes,
+                      maxLines: 6,
+                      readOnly: true,
+                    ),
+                    Expanded(child: SizedBox()),
+                    ElevatedButton(
+                      onPressed: () {
+                        _subscriptionBloc.add(RemoveSubscription(id: sub.id));
+                        router.pop();
+                        _subscriptionBloc.add(LoadSubscriptions());
+                      },
+                      child: Text(t.delete),
+                    ),
+                    Container(
+                      padding: EdgeInsets.symmetric(vertical: 20),
+                      decoration: BoxDecoration(
+                        color: ThemeColors.textIconPrimaryExtraLow,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Row(
+                        spacing: 10,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(SnIcons.circle_warning),
+                          Text(
+                            t.warnings.edit_restricted,
+                            style: ThemeTypography.labelLarge,
+                          ),
+                        ],
+                      ),
+                    ),
+                    5.ph,
+                  ],
+                ),
               ),
             ),
           );
