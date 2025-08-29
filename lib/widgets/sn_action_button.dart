@@ -22,9 +22,16 @@ class SnActionButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onTap,
         style: ElevatedButton.styleFrom(
+          overlayColor: (color == Colors.black) ? Colors.white : Colors.black,
           backgroundColor: color,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
+            side: BorderSide(
+              color: (Theme.of(context).brightness == Brightness.dark)
+                  ? Colors.white
+                  : Colors.black,
+              width: 2,
+            ),
           ),
         ),
         child: Text(

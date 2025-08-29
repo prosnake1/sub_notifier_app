@@ -7,7 +7,6 @@ import 'package:sub_notifier_app/extensions/extensions.dart';
 import 'package:sub_notifier_app/i18n/strings.g.dart';
 import 'package:sub_notifier_app/locator/di.dart';
 import 'package:sub_notifier_app/routes/router.dart';
-import 'package:sub_notifier_app/theme/theme.dart';
 import 'package:sub_notifier_app/widgets/sn_action_button.dart';
 import 'package:sub_notifier_app/widgets/sn_appbar.dart';
 import 'package:sub_notifier_app/widgets/sn_textfield.dart';
@@ -22,6 +21,10 @@ class SubscriptionScreen extends StatefulWidget {
 
 class _SubscriptionScreenState extends State<SubscriptionScreen> {
   final _subscriptionBloc = getIt<SubscriptionBloc>();
+
+  bool isEditingMode = false;
+  bool readOnly = true;
+
   @override
   void initState() {
     _subscriptionBloc.add(LoadSubscription(id: widget.id));
@@ -34,6 +37,11 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
       bloc: _subscriptionBloc,
       builder: (context, state) {
         if (state is SubscriptionLoaded) {
+          if (isEditingMode) {
+            readOnly = false;
+          } else {
+            readOnly = true;
+          }
           final sub = state.subscription;
           return PopScope(
             onPopInvokedWithResult: (didPop, result) =>
@@ -58,7 +66,20 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                                 File(sub.imageUrl!),
                               )
                             : SizedBox(),
-                    Text(sub.name),
+                    AnimatedSwitcher(
+                      duration: Duration(milliseconds: 300),
+                      transitionBuilder: (child, animation) => SlideTransition(
+                        position: Tween<Offset>(
+                          begin: Offset(1.0, 0.0),
+                          end: Offset.zero,
+                        ).animate(animation),
+                        child: child,
+                      ),
+                      child: Text(
+                        key: ValueKey<bool>(isEditingMode),
+                        isEditingMode ? 'Editing Mode' : sub.name,
+                      ),
+                    )
                   ],
                 ),
                 leading: IconButton(
@@ -83,8 +104,8 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                           children: [
                             SnTextField(
                               labelText: t.name,
-                              hintText: sub.name,
-                              readOnly: true,
+                              initialValue: sub.name,
+                              readOnly: readOnly,
                             ),
                             SnTextField(
                               labelText: t.pay_date,
@@ -98,27 +119,36 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                             ),
                             SnTextField(
                               labelText: t.notes,
-                              hintText: sub.notes,
+                              initialValue: sub.notes,
                               maxLines: 6,
-                              readOnly: true,
+                              readOnly: readOnly,
                             ),
                           ],
                         ),
                       ),
                     ),
                     SnActionButton(
-                      text: 'Edit',
-                      color: ThemeColors.textIconExtraLow,
-                      onTap: () {},
+                      onTap: () {
+                        isEditingMode = !isEditingMode;
+                        setState(() {});
+                      },
+                      text: isEditingMode ? 'Save Changes' : 'Edit',
+                      color: (Theme.of(context).brightness == Brightness.dark)
+                          ? Colors.black
+                          : Colors.white,
+                      textColor:
+                          (Theme.of(context).brightness == Brightness.dark)
+                              ? Colors.white
+                              : Colors.black,
                     ),
-                    5.ph,
+                    10.ph,
                     SnActionButton(
-                      text: t.delete,
                       onTap: () {
                         _subscriptionBloc.add(RemoveSubscription(id: sub.id));
                         router.pop();
                         _subscriptionBloc.add(LoadSubscriptions());
                       },
+                      text: t.delete,
                     ),
                   ],
                 ),
