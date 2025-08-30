@@ -3,13 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sub_notifier_app/bloc/subscriptions/subscription_bloc.dart';
-import 'package:sub_notifier_app/extensions/date_extension.dart';
-import 'package:sub_notifier_app/extensions/widget_extension.dart';
+import 'package:sub_notifier_app/extensions/extensions.dart';
 import 'package:sub_notifier_app/i18n/strings.g.dart';
-import 'package:sub_notifier_app/icons/sn_icons.dart';
 import 'package:sub_notifier_app/locator/di.dart';
 import 'package:sub_notifier_app/routes/router.dart';
-import 'package:sub_notifier_app/theme/theme.dart';
+import 'package:sub_notifier_app/widgets/sn_action_button.dart';
 import 'package:sub_notifier_app/widgets/sn_appbar.dart';
 import 'package:sub_notifier_app/widgets/sn_textfield.dart';
 
@@ -23,6 +21,13 @@ class SubscriptionScreen extends StatefulWidget {
 
 class _SubscriptionScreenState extends State<SubscriptionScreen> {
   final _subscriptionBloc = getIt<SubscriptionBloc>();
+
+  bool isEditingMode = false;
+  bool readOnly = true;
+
+  final nameController = TextEditingController();
+  final notesController = TextEditingController();
+
   @override
   void initState() {
     _subscriptionBloc.add(LoadSubscription(id: widget.id));
@@ -35,7 +40,16 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
       bloc: _subscriptionBloc,
       builder: (context, state) {
         if (state is SubscriptionLoaded) {
+          if (isEditingMode) {
+            readOnly = false;
+          } else {
+            readOnly = true;
+          }
           final sub = state.subscription;
+
+          nameController.text = sub.name;
+          notesController.text = sub.notes ?? '';
+
           return PopScope(
             onPopInvokedWithResult: (didPop, result) =>
                 _subscriptionBloc.add(LoadSubscriptions()),
@@ -59,7 +73,20 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                                 File(sub.imageUrl!),
                               )
                             : SizedBox(),
-                    Text(sub.name),
+                    AnimatedSwitcher(
+                      duration: Duration(milliseconds: 300),
+                      transitionBuilder: (child, animation) => SlideTransition(
+                        position: Tween<Offset>(
+                          begin: Offset(1.0, 0.0),
+                          end: Offset.zero,
+                        ).animate(animation),
+                        child: child,
+                      ),
+                      child: Text(
+                        key: ValueKey<bool>(isEditingMode),
+                        isEditingMode ? 'Editing Mode' : sub.name,
+                      ),
+                    )
                   ],
                 ),
                 leading: IconButton(
@@ -71,59 +98,78 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                 ),
               ),
               body: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 10,
+                ),
                 child: Column(
-                  spacing: 10,
                   children: [
-                    SnTextField(
-                      labelText: t.name,
-                      hintText: sub.name,
-                      readOnly: true,
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          spacing: 10,
+                          children: [
+                            SnTextField(
+                              controller: nameController,
+                              labelText: t.name,
+                              // initialValue: sub.name,
+                              readOnly: readOnly,
+                            ),
+                            SnTextField(
+                              labelText: t.pay_date,
+                              hintText: sub.whenPay.toLocalDate().toString(),
+                              readOnly: true,
+                            ),
+                            SnTextField(
+                              labelText: t.when_remind,
+                              hintText: sub.whenNotify.toLocalDate().toString(),
+                              readOnly: true,
+                            ),
+                            SnTextField(
+                              controller: notesController,
+                              labelText: t.notes,
+                              // initialValue: sub.notes,
+                              maxLines: 6,
+                              readOnly: readOnly,
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                    SnTextField(
-                      labelText: t.pay_date,
-                      hintText: sub.whenPay.toLocalDate().toString(),
-                      readOnly: true,
+                    SnActionButton(
+                      onTap: () {
+                        isEditingMode = !isEditingMode;
+                        if (!isEditingMode) {
+                          talker.debug('Подписка изменена');
+                          _subscriptionBloc.add(EditSubscription(
+                            id: sub.id,
+                            name: nameController.text,
+                            imageUrl: sub.imageUrl,
+                            whenNotify: sub.whenNotify,
+                            whenPay: sub.whenPay,
+                            notes: notesController.text,
+                          ));
+                        }
+                        setState(() {});
+                      },
+                      text: isEditingMode ? 'Save Changes' : 'Edit',
+                      color: (Theme.of(context).brightness == Brightness.dark)
+                          ? Colors.black
+                          : Colors.white,
+                      textColor:
+                          (Theme.of(context).brightness == Brightness.dark)
+                              ? Colors.white
+                              : Colors.black,
                     ),
-                    SnTextField(
-                      labelText: t.when_remind,
-                      hintText: sub.whenNotify.toLocalDate().toString(),
-                      readOnly: true,
-                    ),
-                    SnTextField(
-                      labelText: t.notes,
-                      hintText: sub.notes,
-                      maxLines: 6,
-                      readOnly: true,
-                    ),
-                    Expanded(child: SizedBox()),
-                    ElevatedButton(
-                      onPressed: () {
+                    10.ph,
+                    SnActionButton(
+                      onTap: () {
                         _subscriptionBloc.add(RemoveSubscription(id: sub.id));
                         router.pop();
                         _subscriptionBloc.add(LoadSubscriptions());
                       },
-                      child: Text(t.delete),
+                      text: t.delete,
                     ),
-                    Container(
-                      padding: EdgeInsets.symmetric(vertical: 20),
-                      decoration: BoxDecoration(
-                        color: ThemeColors.textIconPrimaryExtraLow,
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Row(
-                        spacing: 10,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(SnIcons.circle_warning),
-                          Text(
-                            t.warnings.edit_restricted,
-                            style: ThemeTypography.labelLarge,
-                          ),
-                        ],
-                      ),
-                    ),
-                    5.ph,
                   ],
                 ),
               ),

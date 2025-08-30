@@ -15,7 +15,7 @@ class SubNotifierApp extends StatelessWidget {
     return BlocBuilder<ThemeCubit, ThemeData>(
       bloc: getIt<ThemeCubit>(),
       builder: (_, theme) {
-        initializeDateFormatting('en_US');
+        initializeDateFormatting('ru_RU');
         return MaterialApp.router(
           debugShowCheckedModeBanner: false,
           theme: theme,

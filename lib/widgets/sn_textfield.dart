@@ -6,7 +6,8 @@ class SnTextField extends StatelessWidget {
     super.key,
     this.controller,
     this.onTap,
-    required this.labelText,
+    this.initialValue,
+    this.labelText = '',
     this.hintText,
     this.readOnly = false,
     this.icon,
@@ -16,6 +17,7 @@ class SnTextField extends StatelessWidget {
   });
   final TextEditingController? controller;
   final Function()? onTap;
+  final String? initialValue;
   final String labelText;
   final String? hintText;
   final bool readOnly;
@@ -35,6 +37,7 @@ class SnTextField extends StatelessWidget {
             style: Theme.of(context).textTheme.titleLarge,
           ),
           TextFormField(
+            initialValue: initialValue,
             onTap: onTap,
             maxLines: maxLines,
             controller: controller,
