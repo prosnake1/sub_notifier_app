@@ -44,6 +44,27 @@ class CreateSubscription extends SubscriptionEvent {
       ];
 }
 
+class EditSubscription extends SubscriptionEvent {
+  EditSubscription({
+    required this.id,
+    required this.name,
+    required this.whenNotify,
+    required this.whenPay,
+    this.imageUrl,
+    this.notes,
+  });
+
+  final String id;
+  final String name;
+  final String? imageUrl;
+  final DateTime whenPay;
+  final DateTime whenNotify;
+  final String? notes;
+
+  @override
+  List<Object?> get props => [id, name, notes];
+}
+
 class RemoveSubscription extends SubscriptionEvent {
   RemoveSubscription({required this.id});
 

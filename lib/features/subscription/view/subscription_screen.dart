@@ -25,6 +25,9 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
   bool isEditingMode = false;
   bool readOnly = true;
 
+  final nameController = TextEditingController();
+  final notesController = TextEditingController();
+
   @override
   void initState() {
     _subscriptionBloc.add(LoadSubscription(id: widget.id));
@@ -43,6 +46,10 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
             readOnly = true;
           }
           final sub = state.subscription;
+
+          nameController.text = sub.name;
+          notesController.text = sub.notes ?? '';
+
           return PopScope(
             onPopInvokedWithResult: (didPop, result) =>
                 _subscriptionBloc.add(LoadSubscriptions()),
@@ -103,8 +110,9 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                           spacing: 10,
                           children: [
                             SnTextField(
+                              controller: nameController,
                               labelText: t.name,
-                              initialValue: sub.name,
+                              // initialValue: sub.name,
                               readOnly: readOnly,
                             ),
                             SnTextField(
@@ -118,8 +126,9 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                               readOnly: true,
                             ),
                             SnTextField(
+                              controller: notesController,
                               labelText: t.notes,
-                              initialValue: sub.notes,
+                              // initialValue: sub.notes,
                               maxLines: 6,
                               readOnly: readOnly,
                             ),
@@ -130,6 +139,17 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     SnActionButton(
                       onTap: () {
                         isEditingMode = !isEditingMode;
+                        if (!isEditingMode) {
+                          talker.debug('Подписка изменена');
+                          _subscriptionBloc.add(EditSubscription(
+                            id: sub.id,
+                            name: nameController.text,
+                            imageUrl: sub.imageUrl,
+                            whenNotify: sub.whenNotify,
+                            whenPay: sub.whenPay,
+                            notes: notesController.text,
+                          ));
+                        }
                         setState(() {});
                       },
                       text: isEditingMode ? 'Save Changes' : 'Edit',

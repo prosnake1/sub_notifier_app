@@ -13,6 +13,7 @@ class SubscriptionBloc extends Bloc<SubscriptionEvent, SubscriptionState> {
   final Box _subscriptionBox;
   SubscriptionBloc(this._subscriptionBox) : super(SubscriptionInitial()) {
     on<CreateSubscription>(_createSubscription);
+    on<EditSubscription>(_editSubscription);
     on<LoadSubscriptions>(_loadSubscriptions);
     on<LoadSubscription>(_loadSubscription);
     on<RemoveSubscription>(_removeSubscription);
@@ -42,6 +43,28 @@ class SubscriptionBloc extends Bloc<SubscriptionEvent, SubscriptionState> {
 
       emit(SubscriptionsLoaded(
         subscriptions: subscriptions,
+      ));
+    } catch (e) {
+      emit(
+        SubscriptionError(error: e),
+      );
+    }
+  }
+
+  Future<void> _editSubscription(event, emit) async {
+    try {
+      final subscription = SubscriptionModel(
+        id: event.id,
+        name: event.name,
+        imageUrl: event.imageUrl,
+        whenPay: event.whenPay,
+        whenNotify: event.whenNotify,
+        notes: event.notes,
+      );
+
+      _subscriptionBox.put(event.id, subscription);
+      emit(SubscriptionLoaded(
+        subscription: subscription,
       ));
     } catch (e) {
       emit(
