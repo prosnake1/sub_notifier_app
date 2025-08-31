@@ -24,6 +24,11 @@
     "about":"Подробнее",
     "charge_off": "Списание: $whenPay",
     "delete": "Удалить",
+    "edit": "Редактировать",
+    "editing_mode": "Редактор",
+    "changes_alert": "Вы хотите применить изменения?",
+    "cancel": "Отмена",
+    "continue": "Продолжить",
     "remind_before": {
         "day": "Напомнить за 1 день",
         "three_days": "Напомнить за 3 дня",

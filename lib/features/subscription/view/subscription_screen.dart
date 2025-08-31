@@ -84,15 +84,48 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                       ),
                       child: Text(
                         key: ValueKey<bool>(isEditingMode),
-                        isEditingMode ? 'Editing Mode' : sub.name,
+                        isEditingMode ? t.editing_mode : sub.name,
                       ),
                     )
                   ],
                 ),
                 leading: IconButton(
                   onPressed: () {
-                    router.pop();
-                    _subscriptionBloc.add(LoadSubscriptions());
+                    if (isEditingMode &&
+                        (nameController.text != sub.name ||
+                            notesController.text != sub.notes)) {
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: Text(t.changes_alert),
+                          actions: [
+                            TextButton(
+                                onPressed: () {
+                                  router.pop();
+                                },
+                                child: Text(t.cancel)),
+                            TextButton(
+                                onPressed: () {
+                                  _subscriptionBloc.add(EditSubscription(
+                                    id: sub.id,
+                                    name: nameController.text,
+                                    imageUrl: sub.imageUrl,
+                                    whenNotify: sub.whenNotify,
+                                    whenPay: sub.whenPay,
+                                    notes: notesController.text,
+                                  ));
+                                  router.pop();
+                                  router.pop();
+                                  _subscriptionBloc.add(LoadSubscriptions());
+                                },
+                                child: Text(t.kContinue)),
+                          ],
+                        ),
+                      );
+                    } else {
+                      router.pop();
+                      _subscriptionBloc.add(LoadSubscriptions());
+                    }
                   },
                   icon: Icon(Icons.arrow_back),
                 ),
@@ -112,7 +145,6 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                             SnTextField(
                               controller: nameController,
                               labelText: t.name,
-                              // initialValue: sub.name,
                               readOnly: readOnly,
                             ),
                             SnTextField(
@@ -128,7 +160,6 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                             SnTextField(
                               controller: notesController,
                               labelText: t.notes,
-                              // initialValue: sub.notes,
                               maxLines: 6,
                               readOnly: readOnly,
                             ),
@@ -140,7 +171,6 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                       onTap: () {
                         isEditingMode = !isEditingMode;
                         if (!isEditingMode) {
-                          talker.debug('Подписка изменена');
                           _subscriptionBloc.add(EditSubscription(
                             id: sub.id,
                             name: nameController.text,
@@ -152,7 +182,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                         }
                         setState(() {});
                       },
-                      text: isEditingMode ? 'Save Changes' : 'Edit',
+                      text: isEditingMode ? t.save : t.edit,
                       color: (Theme.of(context).brightness == Brightness.dark)
                           ? Colors.black
                           : Colors.white,

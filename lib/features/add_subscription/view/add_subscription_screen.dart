@@ -296,7 +296,6 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
                     onTap: () {
                       notifyBeforeDays = choice['days'];
                       _notificationController.text = choice['text'];
-                      talker.warning(notifyBeforeDays);
                       router.pop();
                     },
                     title: Text(

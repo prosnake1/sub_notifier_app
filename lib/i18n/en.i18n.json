@@ -24,6 +24,11 @@
     "about": "More details",
     "charge_off": "Pay on $whenPay",
     "delete": "Delete",
+    "edit": "Edit",
+    "editing_mode": "Editing Mode",
+    "changes_alert": "Do you want to save changes?",
+    "cancel": "Cancel",
+    "continue": "Save",
     "remind_before": {
         "day": "Remind 1 day before",
         "three_days": "Remind 3 days before",
