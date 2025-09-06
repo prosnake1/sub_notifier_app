@@ -9,7 +9,7 @@
   <strong>⚠️ Warning:</strong> This is a test launch. Bugs and limited  app functionality are possible. 
 </div>
 <h1>✅Download (Only Android)</h2>
-<a href="https://github.com/prosnake1/sub_notifier_app/releases/download/beta/app-release.apk" download>
+<a href="https://github.com/prosnake1/sub_notifier_app/releases/download/release/app-release.apk" download>
   <img src="https://img.shields.io/badge/Download-APK-green?style=for-the-badge&logo=android" alt="Download APK">
 </a>
 <h1>🚀Features</h1>
@@ -26,3 +26,5 @@
 
 <h1>🤝Open For Contributing</h1>
 <p>We love contributions from the community!</p>
+
+<h2> *Out of ideas</h2>
