@@ -48,14 +48,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
             onTap: () => router.push('/language'),
           ),
           SettingsButton(
-              icon: SnIcons.circle_information,
-              text: 'Version',
-              onTap: () async {
-                PackageInfo packageInfo = await PackageInfo.fromPlatform();
-                String version = packageInfo.version;
+            icon: SnIcons.circle_information,
+            text: 'Version',
+            onTap: () async {
+              PackageInfo packageInfo = await PackageInfo.fromPlatform();
+              String version = packageInfo.version;
 
-                Fluttertoast.showToast(msg: version);
-              }),
+              Fluttertoast.showToast(msg: version);
+            },
+          ),
         ],
       ),
     );
