@@ -51,7 +51,7 @@ class SnNavigationBar extends StatelessWidget {
                     ),
                     Text(
                       t.my_subs,
-                      style: ThemeTypography.bodySmall.copyWith(
+                      style: ThemeText.bodySmall.copyWith(
                         color: getColor(0),
                       ),
                     ),
@@ -69,7 +69,7 @@ class SnNavigationBar extends StatelessWidget {
                 ),
                 child: Text(
                   t.add,
-                  style: ThemeTypography.bodyLarge,
+                  style: ThemeText.bodyLarge,
                 ),
               ),
             ),
@@ -89,7 +89,7 @@ class SnNavigationBar extends StatelessWidget {
                     ),
                     Text(
                       t.settings,
-                      style: ThemeTypography.bodySmall.copyWith(
+                      style: ThemeText.bodySmall.copyWith(
                         color: getColor(1),
                       ),
                     ),

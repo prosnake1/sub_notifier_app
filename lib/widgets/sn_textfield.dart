@@ -59,7 +59,7 @@ class SnTextField extends StatelessWidget {
                     )
                   : null,
             ),
-            style: ThemeTypography.bodyLarge.copyWith(
+            style: ThemeText.bodyLarge.copyWith(
               fontFamily: 'Roboto',
             ),
           ),

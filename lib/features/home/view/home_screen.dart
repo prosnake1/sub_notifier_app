@@ -8,7 +8,7 @@ import 'package:sub_notifier_app/i18n/strings.g.dart';
 import 'package:sub_notifier_app/locator/di.dart';
 import 'package:sub_notifier_app/routes/router.dart';
 import 'package:sub_notifier_app/theme/theme_colors.dart';
-import 'package:sub_notifier_app/theme/theme_typography.dart';
+import 'package:sub_notifier_app/theme/theme_text.dart';
 import 'package:sub_notifier_app/widgets/widgets.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -40,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
               return Center(
                 child: Text(
                   t.kNull,
-                  style: ThemeTypography.titleLarge,
+                  style: ThemeText.titleLarge,
                 ),
               );
             }

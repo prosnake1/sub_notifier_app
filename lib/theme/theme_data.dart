@@ -12,14 +12,14 @@ final _switchTheme = SwitchThemeData(
 );
 
 final _textTheme = TextTheme(
-  displaySmall: ThemeTypography.displaySmall,
-  headlineLarge: ThemeTypography.headlineLarge,
-  headlineSmall: ThemeTypography.headlineSmall,
-  titleLarge: ThemeTypography.titleLarge,
-  bodyLarge: ThemeTypography.bodyLarge,
-  bodySmall: ThemeTypography.bodySmall,
-  labelLarge: ThemeTypography.labelLarge,
-  labelSmall: ThemeTypography.labelSmall,
+  displaySmall: ThemeText.displaySmall,
+  headlineLarge: ThemeText.headlineLarge,
+  headlineSmall: ThemeText.headlineSmall,
+  titleLarge: ThemeText.titleLarge,
+  bodyLarge: ThemeText.bodyLarge,
+  bodySmall: ThemeText.bodySmall,
+  labelLarge: ThemeText.labelLarge,
+  labelSmall: ThemeText.labelSmall,
 );
 
 class AppTheme {
@@ -38,7 +38,7 @@ class AppTheme {
       appBarTheme: AppBarTheme(
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
-        titleTextStyle: ThemeTypography.headlineSmall.copyWith(
+        titleTextStyle: ThemeText.headlineSmall.copyWith(
           color: (Colors.black),
         ),
       ),
@@ -92,7 +92,7 @@ class AppTheme {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(35),
           ),
-          textStyle: ThemeTypography.bodyLarge.copyWith(
+          textStyle: ThemeText.bodyLarge.copyWith(
             color: Colors.white,
           ),
           foregroundColor: Colors.white,
@@ -121,7 +121,7 @@ class AppTheme {
       appBarTheme: AppBarTheme(
         backgroundColor: Colors.black,
         foregroundColor: Colors.white,
-        titleTextStyle: ThemeTypography.headlineSmall.copyWith(
+        titleTextStyle: ThemeText.headlineSmall.copyWith(
           color: Colors.white,
         ),
       ),
@@ -176,7 +176,7 @@ class AppTheme {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(35),
           ),
-          textStyle: ThemeTypography.bodyLarge.copyWith(
+          textStyle: ThemeText.bodyLarge.copyWith(
             color: Colors.black,
           ),
           foregroundColor: Colors.black,

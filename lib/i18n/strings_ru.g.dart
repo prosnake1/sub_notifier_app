@@ -61,6 +61,11 @@ class TranslationsRu implements Translations {
 	@override String get about => 'Подробнее';
 	@override String charge_off({required Object whenPay}) => 'Списание: ${whenPay}';
 	@override String get delete => 'Удалить';
+	@override String get edit => 'Редактировать';
+	@override String get editing_mode => 'Редактор';
+	@override String get changes_alert => 'Вы хотите применить изменения?';
+	@override String get cancel => 'Отмена';
+	@override String get kContinue => 'Продолжить';
 	@override late final _TranslationsRemindBeforeRu remind_before = _TranslationsRemindBeforeRu._(_root);
 	@override late final _TranslationsSubRu sub = _TranslationsSubRu._(_root);
 	@override late final _TranslationsWarningsRu warnings = _TranslationsWarningsRu._(_root);
@@ -156,6 +161,11 @@ extension on TranslationsRu {
 			case 'about': return 'Подробнее';
 			case 'charge_off': return ({required Object whenPay}) => 'Списание: ${whenPay}';
 			case 'delete': return 'Удалить';
+			case 'edit': return 'Редактировать';
+			case 'editing_mode': return 'Редактор';
+			case 'changes_alert': return 'Вы хотите применить изменения?';
+			case 'cancel': return 'Отмена';
+			case 'kContinue': return 'Продолжить';
 			case 'remind_before.day': return 'Напомнить за 1 день';
 			case 'remind_before.three_days': return 'Напомнить за 3 дня';
 			case 'remind_before.week': return 'Напомнить за неделю';

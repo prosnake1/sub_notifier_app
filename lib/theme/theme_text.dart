@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-class ThemeTypography {
+class ThemeText {
   static const TextStyle displaySmall = TextStyle(
     fontSize: 36,
     fontWeight: FontWeight.bold,

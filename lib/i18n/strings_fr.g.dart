@@ -61,6 +61,11 @@ class TranslationsFr implements Translations {
 	@override String get about => 'Plus de détails';
 	@override String charge_off({required Object whenPay}) => 'Débit : ${whenPay}';
 	@override String get delete => 'Supprimer';
+	@override String get edit => 'Modifier';
+	@override String get editing_mode => 'Mode édition';
+	@override String get changes_alert => 'Voulez-vous appliquer les modifications ?';
+	@override String get cancel => 'Annuler';
+	@override String get kContinue => 'Continuer';
 	@override late final _TranslationsRemindBeforeFr remind_before = _TranslationsRemindBeforeFr._(_root);
 	@override late final _TranslationsSubFr sub = _TranslationsSubFr._(_root);
 	@override late final _TranslationsWarningsFr warnings = _TranslationsWarningsFr._(_root);
@@ -156,6 +161,11 @@ extension on TranslationsFr {
 			case 'about': return 'Plus de détails';
 			case 'charge_off': return ({required Object whenPay}) => 'Débit : ${whenPay}';
 			case 'delete': return 'Supprimer';
+			case 'edit': return 'Modifier';
+			case 'editing_mode': return 'Mode édition';
+			case 'changes_alert': return 'Voulez-vous appliquer les modifications ?';
+			case 'cancel': return 'Annuler';
+			case 'kContinue': return 'Continuer';
 			case 'remind_before.day': return 'Rappeler 1 jour avant';
 			case 'remind_before.three_days': return 'Rappeler 3 jours avant';
 			case 'remind_before.week': return 'Rappeler 1 semaine avant';

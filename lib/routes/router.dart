@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:sub_notifier_app/features/add_subscription/view/add_subscription_screen.dart';
 import 'package:sub_notifier_app/features/change_language/view/change_language_screen.dart';
 import 'package:sub_notifier_app/features/home/view/home_screen.dart';
+import 'package:sub_notifier_app/features/onboarding/view/onboarding_screen.dart';
 import 'package:sub_notifier_app/features/settings/view/settings_screen.dart';
 import 'package:sub_notifier_app/features/splash/view/splash_screen.dart';
 import 'package:sub_notifier_app/features/welcome/view/welcome_screen.dart';
@@ -57,6 +58,12 @@ final GoRouter router = GoRouter(
         return WelcomeScreen();
       },
     ),
+    // GoRoute(
+    //   path: '/onboarding',
+    //   builder: (BuildContext context, GoRouterState state) {
+    //     return OnboardingScreen();
+    //   },
+    // ),
     GoRoute(
       path: '/add-subscription',
       builder: (BuildContext context, GoRouterState state) {

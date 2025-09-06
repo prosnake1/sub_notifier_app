@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
 import 'package:sub_notifier_app/bloc/theme/theme_cubit.dart';
 import 'package:sub_notifier_app/locator/di.dart';
 import 'package:sub_notifier_app/routes/router.dart';
@@ -15,7 +16,17 @@ class SubNotifierApp extends StatelessWidget {
     return BlocBuilder<ThemeCubit, ThemeData>(
       bloc: getIt<ThemeCubit>(),
       builder: (_, theme) {
-        initializeDateFormatting('ru_RU');
+        final locale =
+            WidgetsBinding.instance.platformDispatcher.locale.toString();
+
+        final supportedLocale = Intl.verifiedLocale(
+          locale,
+          (locale) => true,
+          onFailure: (_) => 'en_US',
+        );
+
+        initializeDateFormatting(supportedLocale);
+
         return MaterialApp.router(
           debugShowCheckedModeBanner: false,
           theme: theme,

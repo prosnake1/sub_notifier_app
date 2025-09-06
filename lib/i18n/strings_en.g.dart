@@ -64,6 +64,11 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	String get about => 'More details';
 	String charge_off({required Object whenPay}) => 'Pay on ${whenPay}';
 	String get delete => 'Delete';
+	String get edit => 'Edit';
+	String get editing_mode => 'Editing Mode';
+	String get changes_alert => 'Do you want to save changes?';
+	String get cancel => 'Cancel';
+	String get kContinue => 'Save';
 	late final TranslationsRemindBeforeEn remind_before = TranslationsRemindBeforeEn._(_root);
 	late final TranslationsSubEn sub = TranslationsSubEn._(_root);
 	late final TranslationsWarningsEn warnings = TranslationsWarningsEn._(_root);
@@ -159,6 +164,11 @@ extension on Translations {
 			case 'about': return 'More details';
 			case 'charge_off': return ({required Object whenPay}) => 'Pay on ${whenPay}';
 			case 'delete': return 'Delete';
+			case 'edit': return 'Edit';
+			case 'editing_mode': return 'Editing Mode';
+			case 'changes_alert': return 'Do you want to save changes?';
+			case 'cancel': return 'Cancel';
+			case 'kContinue': return 'Save';
 			case 'remind_before.day': return 'Remind 1 day before';
 			case 'remind_before.three_days': return 'Remind 3 days before';
 			case 'remind_before.week': return 'Remind 1 week before';

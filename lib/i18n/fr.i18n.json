@@ -24,6 +24,11 @@
     "about": "Plus de détails",
     "charge_off": "Débit : $whenPay",
     "delete": "Supprimer",
+    "edit": "Modifier",
+    "editing_mode": "Mode édition",
+    "changes_alert": "Voulez-vous appliquer les modifications ?",
+    "cancel": "Annuler",
+    "continue": "Continuer",
     "remind_before": {
         "day": "Rappeler 1 jour avant",
         "three_days": "Rappeler 3 jours avant",
